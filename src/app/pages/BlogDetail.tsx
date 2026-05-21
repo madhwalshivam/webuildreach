@@ -164,9 +164,7 @@ export default function BlogDetail() {
                   <span className="flex items-center gap-1.5">
                     <Calendar size={13} className="text-primary" /> {new Date(blog.created_at).toLocaleDateString()}
                   </span>
-                  <span className="flex items-center gap-1.5">
-                    <Clock size={13} className="text-primary" /> {Math.ceil((blog.content?.length || 0) / 1000)} min read
-                  </span>
+                 
                   {seoMeta && seoMeta.rating_value && (
                     <span className="flex items-center gap-1.5 bg-[#FAF9F6] border border-amber-200/50 px-2 py-0.5 rounded-md text-slate-700">
                       <span className="text-amber-500 text-xs">★</span>
