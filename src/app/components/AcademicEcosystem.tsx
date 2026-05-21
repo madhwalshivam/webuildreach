@@ -56,15 +56,7 @@ export function AcademicEcosystem() {
             </div>
 
             {/* Play Button Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center z-10">
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/30 group-hover:bg-primary-hover transition-colors duration-300"
-              >
-                <Play className="w-6 h-6 fill-current ml-1" />
-              </motion.div>
-            </div>
+           
 
             {/* Content overlay */}
             <div className="relative z-20 p-8 md:p-12 text-left">
