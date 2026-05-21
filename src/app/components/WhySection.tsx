@@ -47,7 +47,7 @@ export function WhySection() {
               {/* Inner Circle Image */}
               <div className="absolute inset-8 rounded-full overflow-hidden border-8 border-white shadow-2xl bg-slate-100">
                 <img
-                  src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop"
+                  src="https://res.cloudinary.com/dxiasatlk/image/upload/v1779364789/ChatGPT_Image_May_21_2026_05_28_43_PM_1_ghmuv8.png"
                   alt="WeBuildReach Digital Solutions"
                   className="w-full h-full object-cover scale-105 hover:scale-110 transition-transform duration-700"
                 />

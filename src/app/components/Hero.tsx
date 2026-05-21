@@ -93,7 +93,7 @@ export function Hero({ onBookNow }: HeroProps) {
               {/* Large Circular Curved Image Container */}
               <div className="absolute inset-6 rounded-[40%_60%_70%_30%_/_40%_50%_60%_50%] bg-gradient-to-tr from-primary/10 to-pink-50 overflow-hidden border-4 border-white shadow-2xl">
                 <img
-                  src="https://res.cloudinary.com/dxiasatlk/image/upload/v1779363898/d2bf2299-e42f-4113-b721-cdd985638e95_lsh6c1.png"
+                  src="https://res.cloudinary.com/dxiasatlk/image/upload/v1779364973/ChatGPT_Image_May_21_2026_03_59_32_PM_1_losxvo.png"
                   alt="WeBuildReach Professional Expert"
                   className="w-full h-full object-cover object-top scale-105 hover:scale-110 transition-transform duration-700"
                 />
