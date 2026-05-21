@@ -11,7 +11,7 @@ export function WhySection() {
   ];
 
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section className="relative py-12 overflow-hidden">
       {/* Decorative Blur Blobs */}
       <div className="absolute top-[30%] left-[-10%] w-[350px] h-[350px] bg-purple-200/20 rounded-full blur-[100px] pointer-events-none" />
       
@@ -109,15 +109,7 @@ export function WhySection() {
               </div>
 
               {/* CTA Button */}
-              <Button
-                size="lg"
-                className="bg-primary hover:bg-primary/95 text-white rounded-full px-8 py-6 font-bold shadow-[0_4px_14px_rgba(90,69,253,0.3)] transition-all duration-300 flex items-center gap-2 group hover:scale-[1.02]"
-              >
-                Read More
-                <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center text-primary transition-transform duration-300 group-hover:translate-x-1">
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </div>
-              </Button>
+             
 
             </motion.div>
           </div>

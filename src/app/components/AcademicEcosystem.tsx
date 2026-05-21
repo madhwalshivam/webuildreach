@@ -7,7 +7,7 @@ export function AcademicEcosystem() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   return (
-    <section className="relative py-24 bg-transparent overflow-hidden">
+    <section className="relative py-12 bg-transparent overflow-hidden">
       {/* Background ambient light */}
       <div className="absolute bottom-[10%] left-[-5%] w-[400px] h-[400px] bg-purple-100/30 rounded-full blur-[120px] pointer-events-none" />
 

@@ -25,3 +25,10 @@ html {
   background: rgba(90, 69, 253, 0.18);
   color: inherit;
 }
+
+/* ─── Prevent words from breaking/cutting in the middle ─── */
+p, h1, h2, h3, h4, h5, h6, span, li, a {
+  word-break: normal !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}

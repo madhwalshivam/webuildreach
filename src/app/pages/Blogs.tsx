@@ -29,7 +29,12 @@ export default function Blogs() {
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      setBlogs(data || []);
+      const cleanedData = (data || []).map((post: any) => ({
+        ...post,
+        title: post.title ? post.title.replace(/\u00a0/g, " ").replace(/&nbsp;/g, " ") : "",
+        description: post.description ? post.description.replace(/\u00a0/g, " ").replace(/&nbsp;/g, " ") : "",
+      }));
+      setBlogs(cleanedData);
     } catch (error) {
       console.error("Error fetching blogs:", error);
     } finally {
@@ -46,7 +51,7 @@ export default function Blogs() {
       />
 
       {/* Blog Cards */}
-      <section className="py-16 md:py-24 px-6">
+      <section className="py-16 md:py-12 px-6">
         <div className="max-w-7xl mx-auto">
           {loading ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

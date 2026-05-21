@@ -37,13 +37,13 @@ export default function FAQ() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SubPageHero 
-        title="Frequently Asked Questions" 
+      <SubPageHero
+        title="Frequently Asked Questions"
         subtitle="Find quick answers to common queries regarding our development processes, pricing, and campaign management."
       />
 
-      <section className="py-24 max-w-3xl mx-auto px-6 space-y-6">
-        
+      <section className="py-12 max-w-3xl mx-auto px-6 space-y-6">
+
         {/* Title row */}
         <div className="flex items-center gap-3 mb-10">
           <HelpCircle className="w-8 h-8 text-primary" />
@@ -55,7 +55,7 @@ export default function FAQ() {
           {faqData.map((item, index) => {
             const isOpen = openIndex === index;
             return (
-              <div 
+              <div
                 key={index}
                 className="rounded-2xl border border-slate-100 bg-white overflow-hidden transition-all duration-300 hover:border-primary/40 shadow-sm"
               >

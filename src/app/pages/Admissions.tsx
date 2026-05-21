@@ -48,7 +48,7 @@ export default function Admissions() {
       />
 
       {/* Process */}
-      <section className="py-24">
+      <section className="py-12">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">Our Working Process</h2>
@@ -80,7 +80,7 @@ export default function Admissions() {
       </section>
 
       {/* Requirements */}
-      <section className="py-24 bg-white/5 border-y border-white/5">
+      <section className="py-12 bg-white/5 border-y border-white/5">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold text-white mb-12">Why Consult With Us?</h2>
           <div className="grid md:grid-cols-2 gap-8 text-left">
@@ -97,7 +97,7 @@ export default function Admissions() {
       </section>
 
       {/* Admission Form Section */}
-      <section className="py-24">
+      <section className="py-12">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             {/* Info Side */}

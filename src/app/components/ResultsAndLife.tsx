@@ -75,13 +75,13 @@ const industries = [
 
 export function ResultsAndLife() {
   return (
-    <section id="portfolio" className="relative py-24 bg-transparent overflow-hidden">
-      
+    <section id="portfolio" className="relative py-12 bg-transparent overflow-hidden">
+
       {/* Background ambient light */}
       <div className="absolute top-[20%] right-[-10%] w-[450px] h-[450px] bg-pink-100/20 rounded-full blur-[130px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        
+
         {/* Benefits Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -120,7 +120,7 @@ export function ResultsAndLife() {
                 <h3 className="text-slate-900 font-extrabold text-lg mb-3">
                   {benefit.title}
                 </h3>
-                
+
                 <p className="text-slate-500 text-sm leading-relaxed">
                   {benefit.desc}
                 </p>

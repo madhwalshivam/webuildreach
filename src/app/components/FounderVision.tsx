@@ -3,7 +3,7 @@ import { Quote, Rocket, BarChart, History } from "lucide-react";
 
 export function FounderVision() {
   return (
-    <section className="relative py-20 bg-transparent overflow-hidden">
+    <section className="relative py-12 bg-transparent overflow-hidden">
       {/* Background ambient blobs */}
       <div className="absolute top-[20%] right-[-5%] w-[300px] h-[300px] bg-pink-100/30 rounded-full blur-[90px] pointer-events-none" />
       

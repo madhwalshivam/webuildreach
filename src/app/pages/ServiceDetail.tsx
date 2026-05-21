@@ -187,13 +187,13 @@ export default function ServiceDetail({ onBookNow }: ServiceDetailProps) {
 
   return (
     <main className="bg-background text-foreground min-h-screen">
-      <SubPageHero 
-        title={service.title} 
+      <SubPageHero
+        title={service.title}
         subtitle={service.subtitle}
       />
 
       {/* Features Grid */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6">
+      <section className="py-16 sm:py-12 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-center mb-16 sm:mb-32">
             <motion.div
@@ -216,7 +216,7 @@ export default function ServiceDetail({ onBookNow }: ServiceDetailProps) {
                 ))}
               </div>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -266,13 +266,13 @@ export default function ServiceDetail({ onBookNow }: ServiceDetailProps) {
             className="mt-20 sm:mt-32 p-6 sm:p-12 rounded-3xl sm:rounded-[3rem] bg-gradient-to-r from-primary to-indigo-600 text-center shadow-xl text-white relative overflow-hidden"
           >
             <div className="absolute top-[-50%] left-[-20%] w-[350px] h-[350px] bg-white/5 rounded-full blur-3xl pointer-events-none" />
-            
+
             <h2 className="text-white text-2xl sm:text-3xl md:text-5xl font-extrabold mb-6 leading-tight relative z-10">
               Ready to build your <br /> next project?
             </h2>
-            
-            <Button 
-              size="lg" 
+
+            <Button
+              size="lg"
               onClick={onBookNow}
               className="bg-white hover:bg-slate-50 text-primary hover:text-primary/95 font-bold w-full sm:w-auto px-12 py-6 rounded-full text-base sm:text-lg md:text-xl shadow-lg transition-all relative z-10"
             >

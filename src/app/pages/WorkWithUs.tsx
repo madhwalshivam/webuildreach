@@ -57,13 +57,13 @@ export default function WorkWithUs() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SubPageHero 
-        title="Work With Us" 
+      <SubPageHero
+        title="Work With Us"
         subtitle="Join our team of creative designers, developers, and growth marketers building premium digital products."
       />
 
-      <section className="py-24 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16">
-        
+      <section className="py-12 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16">
+
         {/* Open Positions list */}
         <div className="space-y-8">
           <div className="space-y-3">
@@ -86,7 +86,7 @@ export default function WorkWithUs() {
               >
                 <h3 className="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">{pos.title}</h3>
                 <p className="text-slate-500 text-sm leading-relaxed">{pos.desc}</p>
-                
+
                 <div className="flex flex-wrap gap-4 text-xs font-semibold text-slate-400">
                   <span className="flex items-center gap-1">
                     <MapPin size={14} className="text-primary" /> {pos.location}
@@ -114,7 +114,7 @@ export default function WorkWithUs() {
             <p className="text-slate-500 text-xs font-medium mb-8">Submit your portfolio details and we will schedule an introductory call.</p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
-              
+
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Your Name</label>

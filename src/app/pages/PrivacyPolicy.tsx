@@ -16,7 +16,7 @@ export default function PrivacyPolicy() {
         backgroundImage="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop"
       />
 
-      <section className="py-24 max-w-4xl mx-auto px-6 space-y-12 text-left">
+      <section className="py-12 max-w-4xl mx-auto px-6 space-y-12 text-left">
         <div className="flex items-center gap-4 p-6 rounded-3xl bg-white border border-slate-200/60 shadow-sm">
           <Shield className="w-10 h-10 text-primary flex-shrink-0" />
           <div>

@@ -17,9 +17,9 @@ export default function Contact() {
         subtitle="We're always open to discussing new projects, creative ideas, or opportunities to be part of your vision."
       />
 
-      <section className="py-24 max-w-7xl mx-auto px-6">
+      <section className="py-12 max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16">
-          
+
           {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -28,9 +28,9 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl font-extrabold text-slate-900 mb-8">Contact Information</h2>
-            
+
             <div className="space-y-8">
-              
+
               {/* Location */}
               <div className="flex gap-6">
                 <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -78,7 +78,7 @@ export default function Contact() {
             className="bg-card p-10 rounded-3xl shadow-xl border border-slate-100"
           >
             <h2 className="text-3xl font-extrabold text-slate-900 mb-8">Send a Message</h2>
-            
+
             <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>

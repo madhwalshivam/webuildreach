@@ -33,19 +33,19 @@ export default function Campus() {
 
   return (
     <div className="min-h-screen bg-[#050505] text-white">
-      <SubPageHero 
-        title="Project Portfolio" 
+      <SubPageHero
+        title="Project Portfolio"
         subtitle="Explore a selection of high-performance digital products and successful marketing campaigns delivered to our clients."
         backgroundImage="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop"
       />
 
       {/* Projects Grid */}
-      <section className="py-24 max-w-7xl mx-auto px-6">
+      <section className="py-12 max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">Featured Work</h2>
           <div className="w-20 h-1 bg-[#EF4444] mx-auto" />
         </div>
-        
+
         <div className="grid md:grid-cols-2 gap-12">
           {projects.map((project, index) => (
             <motion.div
@@ -56,9 +56,9 @@ export default function Campus() {
               transition={{ delay: index * 0.1 }}
               className="group relative overflow-hidden rounded-4xl h-[450px] shadow-2xl border border-white/5"
             >
-              <img 
-                src={project.image} 
-                alt={project.title} 
+              <img
+                src={project.image}
+                alt={project.title}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-90" />
@@ -74,7 +74,7 @@ export default function Campus() {
       </section>
 
       {/* Performance Section */}
-      <section className="py-24 bg-white/5 border-t border-white/5">
+      <section className="py-12 bg-white/5 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -102,9 +102,9 @@ export default function Campus() {
             viewport={{ once: true }}
             className="rounded-4xl overflow-hidden shadow-2xl h-[450px] border border-white/5"
           >
-            <img 
-              src="https://images.unsplash.com/photo-1551288049-bbbda5366391?q=80&w=2070&auto=format&fit=crop" 
-              alt="Performance Metrics" 
+            <img
+              src="https://images.unsplash.com/photo-1551288049-bbbda5366391?q=80&w=2070&auto=format&fit=crop"
+              alt="Performance Metrics"
               className="w-full h-full object-cover"
             />
           </motion.div>

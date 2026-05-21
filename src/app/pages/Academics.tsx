@@ -63,13 +63,13 @@ export default function Academics() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SubPageHero 
-        title="Professional Services" 
+      <SubPageHero
+        title="Professional Services"
         subtitle="Comprehensive digital solutions designed to accelerate your business growth and technical efficiency."
       />
 
       {/* Services Grid */}
-      <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="py-16 sm:py-12 max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {services.map((service, index) => (
             <motion.div
@@ -87,12 +87,12 @@ export default function Academics() {
               <p className="text-slate-500 leading-relaxed mb-8 flex-grow">
                 {service.description}
               </p>
-              
-              <Link 
+
+              <Link
                 to={`/services/${service.slug}`}
                 className="inline-flex items-center gap-2 text-primary font-bold text-sm group/btn"
               >
-                Learn More 
+                Learn More
                 <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
@@ -101,9 +101,9 @@ export default function Academics() {
       </section>
 
       {/* Why Choose Me Details */}
-      <section className="py-16 sm:py-24 bg-slate-50 border-y border-slate-100">
+      <section className="py-16 sm:py-12 bg-slate-50 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-          
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -113,7 +113,7 @@ export default function Academics() {
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-6 sm:mb-8">
               Premier Digital Marketing <span className="text-primary">& Development Agency</span>
             </h2>
-            
+
             <div className="space-y-6">
               <div className="flex gap-4">
                 <div className="w-1.5 h-1.5 rounded-full bg-primary mt-3 flex-shrink-0" />
@@ -142,13 +142,13 @@ export default function Academics() {
             className="relative"
           >
             <div className="aspect-square rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-white">
-              <img 
-                src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop" 
-                alt="Web Development Workspace" 
+              <img
+                src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop"
+                alt="Web Development Workspace"
                 className="w-full h-full object-cover"
               />
             </div>
-            
+
             <div className="absolute -bottom-6 -left-6 bg-primary p-8 rounded-3xl shadow-xl hidden md:block">
               <p className="text-white font-extrabold text-2xl">100%</p>
               <p className="text-white/80 font-bold">Client Satisfaction</p>

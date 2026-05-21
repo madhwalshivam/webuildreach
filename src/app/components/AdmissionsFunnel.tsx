@@ -31,13 +31,13 @@ export function AdmissionsFunnel() {
   };
 
   return (
-    <section className="relative py-24 bg-transparent overflow-hidden">
+    <section className="relative py-12 bg-transparent overflow-hidden">
       {/* Background ambient lighting */}
       <div className="absolute top-[20%] right-[-10%] w-[450px] h-[450px] bg-purple-100/30 rounded-full blur-[130px] pointer-events-none" />
       <div className="absolute bottom-[30%] left-[-10%] w-[350px] h-[350px] bg-pink-100/20 rounded-full blur-[110px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        
+
         {/* Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -59,7 +59,7 @@ export function AdmissionsFunnel() {
 
         {/* Contact Info & Form Row */}
         <div className="grid lg:grid-cols-12 gap-8 items-stretch mb-24">
-          
+
           {/* Left Column: Indigo Contact details card */}
           <motion.div
             initial={{ opacity: 0, x: -35 }}
@@ -76,11 +76,11 @@ export function AdmissionsFunnel() {
               <span className="inline-block px-3 py-1 rounded-full bg-white/10 text-white text-[10px] font-bold tracking-widest uppercase mb-6">
                 CONTACT INFO
               </span>
-              
+
               <h3 className="font-extrabold text-2xl md:text-3xl mb-4 leading-tight">
                 Let's discuss how we can scale your brand
               </h3>
-              
+
               <p className="text-white/80 text-sm leading-relaxed mb-8">
                 Fill out the form to request a performance marketing analysis or custom application plan.
               </p>
@@ -88,7 +88,7 @@ export function AdmissionsFunnel() {
 
             {/* List details */}
             <div className="space-y-6 relative z-10">
-              
+
               {/* Item 1 */}
               <div className="flex gap-4 items-start">
                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0 border border-white/5">
@@ -125,7 +125,7 @@ export function AdmissionsFunnel() {
             className="lg:col-span-7 bg-white p-8 md:p-10 border border-slate-100 rounded-3xl shadow-xl flex flex-col justify-center"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
-              
+
               {/* First Name & Last Name Grid */}
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>

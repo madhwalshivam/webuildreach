@@ -48,7 +48,7 @@ const popularServices = [
 
 export function CampusExperience() {
   return (
-    <section className="relative py-24 bg-transparent overflow-hidden">
+    <section className="relative py-12 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Section Heading */}

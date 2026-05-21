@@ -59,7 +59,19 @@ export default function BlogDetail() {
       
       const { cleanContent, metadata } = extractSeoMetadata(blogData.content);
       
-      setBlog({ ...blogData, content: cleanContent });
+      const processedContent = cleanContent
+        ? cleanContent.replace(/\u00a0/g, " ").replace(/&nbsp;/g, " ")
+        : "";
+
+      const processedDescription = blogData.description
+        ? blogData.description.replace(/\u00a0/g, " ").replace(/&nbsp;/g, " ")
+        : "";
+      
+      setBlog({ 
+        ...blogData, 
+        content: processedContent,
+        description: processedDescription
+      });
       setSeoMeta(metadata);
 
       let canonicalLink = document.querySelector("link[rel='canonical']");
@@ -80,7 +92,11 @@ export default function BlogDetail() {
         .order("created_at", { ascending: false })
         .limit(4);
       
-      setRecentPosts(recentData || []);
+      const cleanedRecent = (recentData || []).map((post: any) => ({
+        ...post,
+        title: post.title ? post.title.replace(/\u00a0/g, " ").replace(/&nbsp;/g, " ") : "",
+      }));
+      setRecentPosts(cleanedRecent);
     } catch (error: any) {
       console.error(error);
       toast.error("Article not found");
@@ -318,7 +334,20 @@ export default function BlogDetail() {
           font-size: 1.125rem;
           word-wrap: break-word;
           overflow-wrap: break-word;
+          word-break: normal;
           max-width: 100%;
+        }
+        .blog-content p, 
+        .blog-content span, 
+        .blog-content h1, 
+        .blog-content h2, 
+        .blog-content h3, 
+        .blog-content h4, 
+        .blog-content li, 
+        .blog-content a {
+          word-break: normal !important;
+          word-wrap: break-word !important;
+          overflow-wrap: break-word !important;
         }
         .blog-content h1 { 
           font-size: 2.25rem; 
