@@ -429,14 +429,7 @@ export default function BlogDetail() {
                 "url": "https://webuildreach.com/logo.png"
               }
             },
-            "datePublished": blog.created_at,
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": seoMeta.rating_value || "4.8",
-              "ratingCount": seoMeta.rating_count || "125",
-              "bestRating": "5",
-              "worstRating": "1"
-            }
+            "datePublished": blog.created_at
           })}
         </script>
       )}
