@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
+import { useDocumentMetadata } from "../hooks/useDocumentMetadata";
 import { useParams, Link, useNavigate } from "react-router";
 import { supabase } from "../../lib/supabase";
 import { motion } from "motion/react";
-import { Calendar, ArrowLeft, Loader2, Clock, Share2, Bookmark, MoreHorizontal } from "lucide-react";
+import { Calendar, ArrowLeft, Clock, Share2, Bookmark, MoreHorizontal } from "lucide-react";
 import { toast } from "sonner";
+import { Button } from "../components/ui/button";
+import { extractSeoMetadata } from "../utils/seoAnalyzer";
 
 export default function BlogDetail() {
   const { slug } = useParams();
@@ -12,6 +15,22 @@ export default function BlogDetail() {
   const [recentPosts, setRecentPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [seoMeta, setSeoMeta] = useState<any>(null);
+
+  useDocumentMetadata(
+    blog ? blog.title : "Loading Article",
+    blog ? blog.description : "Read this article on WeBuildReach.",
+    blog ? { 
+      image: blog.image_url, 
+      type: "article", 
+      keywords: seoMeta?.meta_keywords,
+      canonical: seoMeta?.custom_canonical || `https://webuildreach.com/blogs/${slug}`,
+      robots: seoMeta?.robots_meta 
+        ? `${seoMeta.robots_meta.index ? "index" : "noindex"}, ${seoMeta.robots_meta.follow ? "follow" : "nofollow"}${seoMeta.robots_meta.noarchive ? ", noarchive" : ""}`
+        : "index, follow",
+      publisher: "https://webuildreach.com"
+    } : undefined
+  );
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -37,8 +56,11 @@ export default function BlogDetail() {
         .single();
 
       if (blogError) throw blogError;
-      setBlog(blogData);
-      document.title = `${blogData.title} | Shivam Builds`;
+      
+      const { cleanContent, metadata } = extractSeoMetadata(blogData.content);
+      
+      setBlog({ ...blogData, content: cleanContent });
+      setSeoMeta(metadata);
 
       let canonicalLink = document.querySelector("link[rel='canonical']");
       if (!canonicalLink) {
@@ -46,8 +68,7 @@ export default function BlogDetail() {
         canonicalLink.setAttribute("rel", "canonical");
         document.head.appendChild(canonicalLink);
       }
-      const rawCanonical = blogData.canonical_url || "";
-      const normalizedCanonical = rawCanonical.replace("https://shivambuilds.in", "https://www.shivambuilds.in") || `https://www.shivambuilds.in/blogs/${slug}`;
+      const normalizedCanonical = metadata.custom_canonical || `https://webuildreach.com/blogs/${slug}`;
       canonicalLink.setAttribute("href", normalizedCanonical);
 
       const { data: recentData } = await supabase
@@ -55,11 +76,13 @@ export default function BlogDetail() {
         .select("title, slug, image_url, created_at, category")
         .eq("is_published", true)
         .neq("id", blogData.id)
+        .neq("slug", "site-settings-topbar")
         .order("created_at", { ascending: false })
         .limit(4);
       
       setRecentPosts(recentData || []);
     } catch (error: any) {
+      console.error(error);
       toast.error("Article not found");
       navigate("/blogs");
     } finally {
@@ -69,8 +92,8 @@ export default function BlogDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#050505] flex items-center justify-center">
-        <div className="w-12 h-12 rounded-full border-4 border-blue-500/20 border-t-blue-500 animate-spin" />
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="w-12 h-12 rounded-full border-4 border-primary/20 border-t-primary animate-spin" />
       </div>
     );
   }
@@ -78,155 +101,143 @@ export default function BlogDetail() {
   if (!blog) return null;
 
   return (
-    <main className="bg-[#050505] min-h-screen pb-40 text-white selection:bg-blue-500/30">
+    <main className="bg-background min-h-screen pt-28 pb-40 text-slate-800 selection:bg-primary/20">
       {/* Progress Bar */}
-      <div className="fixed top-0 left-0 w-full h-[2px] z-[1000] bg-white/5">
+      <div className="fixed top-0 left-0 w-full h-[2px] z-[1000] bg-slate-100">
         <motion.div 
-          className="h-full bg-gradient-to-r from-blue-600 to-purple-600"
+          className="h-full bg-gradient-to-r from-primary to-indigo-600"
           style={{ width: `${scrollProgress}%` }}
         />
       </div>
 
-      {/* ── CINEMATIC HERO ── */}
-      <div className="relative w-full h-[70vh] min-h-[600px] flex items-end pb-24 px-6 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src={blog.image_url} 
-            alt={blog.title} 
-            className="w-full h-full object-cover scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent" />
-          <div className="absolute inset-0 bg-black/20" />
-        </div>
-
-        <div className="max-w-5xl mx-auto w-full relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="space-y-6"
-          >
-            <Link to="/blogs" className="inline-flex items-center gap-2 text-white/60 hover:text-white text-xs font-semibold uppercase tracking-widest transition-colors group">
-              <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> Back to journal
-            </Link>
-
-            <div className="space-y-4 max-w-4xl">
-              <span className="px-4 py-1.5 rounded-full text-[10px] font-semibold uppercase tracking-[0.2em] bg-blue-600 text-white shadow-xl shadow-blue-600/20">
-                {blog.category}
-              </span>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-white drop-shadow-2xl">
-                {blog.title}
-              </h1>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-8 pt-4">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                  {blog.author?.[0] || "S"}
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-white">{blog.author || "Shivam Builds"}</p>
-                  <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Lead Architect</p>
-                </div>
-              </div>
-              <div className="h-8 w-[1px] bg-white/10 hidden md:block" />
-              <div className="flex items-center gap-6 text-[11px] font-black uppercase tracking-widest text-white/50">
-                <span className="flex items-center gap-2"><Calendar size={14} className="text-blue-500" /> {new Date(blog.created_at).toLocaleDateString()}</span>
-                <span className="flex items-center gap-2"><Clock size={14} className="text-blue-500" /> {Math.ceil((blog.content?.length || 0) / 1000)} min read</span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* ── CONTENT AREA ── */}
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1fr_320px] gap-12 mt-12">
+      {/* Content Area */}
+      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1fr_320px] gap-12 text-left">
         
         {/* Main Article Card */}
         <article className="min-w-0">
-          <div className="bg-[#0A0A0A] border border-white/5 rounded-[32px] p-8 md:p-12 shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-purple-600 opacity-50" />
+          {/* Back link */}
+          <Link to="/blogs" className="inline-flex items-center gap-2 text-slate-500 hover:text-primary text-xs font-semibold uppercase tracking-widest transition-colors group mb-6">
+            <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> Back to journal
+          </Link>
+
+          {/* Card with image at top */}
+          <div className="bg-white border border-slate-100 rounded-3xl shadow-lg overflow-hidden relative">
+            {/* Featured Image inside card */}
+            <div className="relative aspect-[16/9] overflow-hidden">
+              <img 
+                src={blog.image_url} 
+                alt={blog.title} 
+                className="w-full h-full object-cover"
+              />
+              {/* Category badge on image */}
+              <div className="absolute top-5 left-5">
+                <span className="px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary/90 text-white backdrop-blur-sm">
+                  {blog.category}
+                </span>
+              </div>
+            </div>
+
+            {/* Title & meta below image, inside the card */}
+            <div className="p-8 md:p-12 space-y-6">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-[1.15] tracking-tight text-slate-900">
+                {blog.title}
+              </h2>
+
+              <div className="flex flex-wrap items-center gap-6">
+                <div className="flex flex-wrap items-center gap-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">
+                  <span className="flex items-center gap-1.5">
+                    <Calendar size={13} className="text-primary" /> {new Date(blog.created_at).toLocaleDateString()}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Clock size={13} className="text-primary" /> {Math.ceil((blog.content?.length || 0) / 1000)} min read
+                  </span>
+                  {seoMeta && seoMeta.rating_value && (
+                    <span className="flex items-center gap-1.5 bg-[#FAF9F6] border border-amber-200/50 px-2 py-0.5 rounded-md text-slate-700">
+                      <span className="text-amber-500 text-xs">★</span>
+                      <span>{seoMeta.rating_value}</span>
+                      <span className="text-[9px] text-slate-400 font-semibold lowercase">({seoMeta.rating_count} reviews)</span>
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="w-full h-px bg-slate-100" />
             
-            {/* Article Description */}
-            {blog.description && (
-              <p className="text-lg md:text-xl text-gray-400 font-medium leading-relaxed mb-12 border-l-2 border-blue-500/50 pl-6 italic">
-                {blog.description}
-              </p>
-            )}
+              {/* Article Description */}
+              {blog.description && (
+                <p className="text-lg md:text-xl text-slate-600 font-medium leading-relaxed border-l-2 border-primary/50 pl-6 italic">
+                  {blog.description}
+                </p>
+              )}
 
-            <div className="flex items-center justify-between py-6 border-y border-white/5 mb-12">
-              <div className="flex items-center gap-4">
-                <button 
-                  onClick={() => {
-                    navigator.clipboard.writeText(window.location.href);
-                    toast.success("Link copied to clipboard!");
-                  }}
-                  className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest text-gray-400 hover:text-white transition-colors"
-                >
-                  <Share2 size={16} className="text-blue-500" /> Share
-                </button>
-                <button className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest text-gray-400 hover:text-white transition-colors">
-                  <Bookmark size={16} /> Save
-                </button>
-              </div>
-              <button className="text-gray-400 hover:text-white transition-colors"><MoreHorizontal size={20} /></button>
-            </div>
-
-            {/* Body Content */}
-            <div 
-              className="blog-content"
-              dangerouslySetInnerHTML={{ __html: blog.content }}
-            />
-
-            {/* Tags & Author */}
-            <div className="mt-20 pt-12 border-t border-white/5 space-y-12">
-              <div className="flex flex-wrap gap-2">
-                <span className="px-4 py-1.5 rounded-xl bg-white/5 border border-white/10 text-[10px] font-semibold uppercase tracking-widest text-gray-400">
-                  # {blog.category}
-                </span>
-                <span className="px-4 py-1.5 rounded-xl bg-white/5 border border-white/10 text-[10px] font-semibold uppercase tracking-widest text-gray-400">
-                  # Innovation
-                </span>
-              </div>
-
-              <div className="flex flex-col md:flex-row gap-8 items-center p-8 rounded-3xl bg-white/[0.02] border border-white/5">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex-shrink-0 flex items-center justify-center text-3xl font-black text-white">
-                  {blog.author?.[0] || "S"}
+              <div className="flex items-center justify-between py-6 border-y border-slate-100">
+                <div className="flex items-center gap-4">
+                  <button 
+                    onClick={() => {
+                      navigator.clipboard.writeText(window.location.href);
+                      toast.success("Link copied to clipboard!");
+                    }}
+                    className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest text-slate-500 hover:text-primary transition-colors"
+                  >
+                    <Share2 size={16} className="text-primary" /> Share
+                  </button>
+                 
                 </div>
-                <div className="space-y-2 text-center md:text-left">
-                  <h3 className="text-xl font-semibold text-white">Written by {blog.author || "Shivam Builds"}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed max-w-md">
-                    Shivam is a visionary digital architect focused on building premium, high-performance web experiences.
-                  </p>
+                <button className="text-slate-400 hover:text-primary transition-colors">
+                  <MoreHorizontal size={20} />
+                </button>
+              </div>
+
+              {/* Body Content */}
+              <div 
+                className="blog-content"
+                dangerouslySetInnerHTML={{ __html: blog.content }}
+              />
+
+              {/* Tags & Author */}
+              <div className="mt-16 pt-10 border-t border-slate-100 space-y-10">
+               
+
+                <div className="flex flex-col md:flex-row gap-6 items-center p-6 rounded-2xl bg-slate-50 border border-slate-100">
+                  
+                  <div className="space-y-1 text-center md:text-left">
+                    <h3 className="text-lg font-semibold text-slate-900">Written by {blog.author || "WeBuildReach Team"}</h3>
+                    <p className="text-slate-500 text-sm leading-relaxed max-w-md">
+                      WeBuildReach is a premium digital agency focused on building premium, high-performance web experiences.
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+
+            </div>{/* end p-8 md:p-12 */}
+          </div>{/* end card */}
         </article>
 
-        {/* ── SIDEBAR ── */}
+        {/* Sidebar */}
         <aside>
           <div className="sticky top-24 space-y-12">
+            
             {/* Sidebar Heading */}
             <div className="space-y-6">
               <div className="flex items-center gap-3">
-                <div className="w-1 h-5 bg-blue-600 rounded-full" />
-                <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Related Insight</h3>
+                <div className="w-1 h-5 bg-primary rounded-full" />
+                <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Related Insight</h3>
               </div>
               <div className="space-y-4">
                 {recentPosts.map((post) => (
-                  <RecentCard key={post.slug} post={post} accentColor="#3B82F6" compact />
+                  <RecentCard key={post.slug} post={post} accentColor="#5A45FD" compact />
                 ))}
               </div>
             </div>
 
             {/* Quick Booking Form Card */}
-            <div className="p-8 rounded-[32px] bg-[#0A0A0A] border border-white/5 relative overflow-hidden shadow-xl">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/5 blur-[60px] pointer-events-none" />
+            <div className="p-8 rounded-[32px] bg-card border border-slate-100 relative overflow-hidden shadow-xl">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-[60px] pointer-events-none" />
               <div className="relative z-10 space-y-6">
                 <div className="space-y-2">
-                  <h3 className="text-lg font-semibold text-white tracking-tight">Quick Booking</h3>
-                  <p className="text-[11px] text-gray-500 leading-relaxed">Fill the form below to book a professional service.</p>
+                  <h3 className="text-lg font-bold text-slate-900 tracking-tight">Quick Booking</h3>
+                  <p className="text-[11px] text-slate-500 leading-relaxed font-semibold">Fill the form below to book a professional service.</p>
                 </div>
 
                 <form 
@@ -258,26 +269,26 @@ export default function BlogDetail() {
                     type="text" 
                     placeholder="Your Name" 
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-blue-500/50 transition-colors text-white" 
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-primary/50 text-slate-800" 
                   />
                   <input 
                     name="email"
                     type="email" 
                     placeholder="Email Address" 
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-blue-500/50 transition-colors text-white" 
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-primary/50 text-slate-800" 
                   />
                   <input 
                     name="phone"
                     type="tel" 
                     placeholder="Phone (+91)" 
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-blue-500/50 transition-colors text-white" 
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-primary/50 text-slate-800" 
                   />
                   <select 
                     name="service"
                     required
-                    className="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-blue-500/50 transition-colors text-gray-400"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-primary/50 text-slate-500"
                   >
                     <option value="">Select Service</option>
                     <option value="web-dev">Web Development</option>
@@ -285,15 +296,16 @@ export default function BlogDetail() {
                     <option value="seo">SEO & Marketing</option>
                     <option value="uiux">UI/UX Design</option>
                   </select>
-                  <button 
+                  <Button 
                     type="submit"
-                    className="w-full bg-blue-600 text-white font-semibold py-4 rounded-xl hover:bg-blue-700 transition-all text-xs uppercase tracking-widest shadow-lg shadow-blue-500/20 active:scale-[0.98]"
+                    className="w-full bg-primary hover:bg-primary/95 text-white font-bold py-6 rounded-xl transition-all text-xs uppercase tracking-widest shadow-lg shadow-primary/20"
                   >
                     Get a Free Quote
-                  </button>
+                  </Button>
                 </form>
               </div>
             </div>
+
           </div>
         </aside>
 
@@ -301,39 +313,58 @@ export default function BlogDetail() {
 
       <style>{`
         .blog-content {
-          color: #94A3B8;
+          color: #475569;
           line-height: 1.8;
           font-size: 1.125rem;
           word-wrap: break-word;
           overflow-wrap: break-word;
           max-width: 100%;
         }
+        .blog-content h1 { 
+          font-size: 2.25rem; 
+          font-weight: 800; 
+          color: #0F172A; 
+          margin: 4rem 0 2rem; 
+          letter-spacing: -0.03em; 
+          line-height: 1.2; 
+        }
         .blog-content h2 { 
           font-size: 1.75rem; 
-          font-weight: 600; 
-          color: white; 
+          font-weight: 800; 
+          color: #0F172A; 
           margin: 3.5rem 0 1.5rem; 
           letter-spacing: -0.02em; 
           line-height: 1.25; 
         }
         .blog-content h3 { 
           font-size: 1.4rem; 
-          font-weight: 600; 
-          color: white; 
+          font-weight: 800; 
+          color: #0F172A; 
           margin: 2.5rem 0 1rem; 
           letter-spacing: -0.01em;
         }
         .blog-content p { 
           margin-bottom: 1.5rem; 
         }
-        .blog-content strong { color: white; font-weight: 600; }
+        .blog-content strong { color: #0F172A; font-weight: 700; }
+        .blog-content a {
+          color: #5A45FD;
+          font-weight: 700;
+          text-decoration: underline;
+          text-underline-offset: 4px;
+          transition: color 0.2s ease, text-decoration-color 0.2s ease;
+        }
+        .blog-content a:hover {
+          color: #4338CA;
+          text-decoration-color: #4338CA;
+        }
         .blog-content blockquote {
-          background: rgba(255,255,255,0.02);
-          border-left: 4px solid #2563EB;
+          background: #F8FAFC;
+          border-left: 4px solid #5A45FD;
           padding: 2rem;
           border-radius: 0 16px 16px 0;
           font-style: italic;
-          color: #E2E8F0;
+          color: #334155;
           margin: 3rem 0;
           font-size: 1.25rem;
         }
@@ -347,7 +378,7 @@ export default function BlogDetail() {
           content: "•";
           position: absolute;
           left: 0;
-          color: #2563EB;
+          color: #5A45FD;
           font-weight: bold;
         }
         .blog-content img { 
@@ -355,34 +386,69 @@ export default function BlogDetail() {
           margin: 3rem 0; 
           width: 100%; 
           height: auto; 
-          border: 1px solid rgba(255,255,255,0.05); 
+          border: 1px solid #E2E8F0; 
         }
         .blog-content pre { 
-          background: #050505; 
+          background: #0B0F19; 
           padding: 1.5rem; 
           border-radius: 20px; 
-          border: 1px solid rgba(255,255,255,0.05); 
+          border: 1px solid #1E293B; 
           overflow-x: auto; 
           margin: 2.5rem 0; 
         }
         .blog-content code { 
           font-family: 'JetBrains Mono', monospace; 
-          color: #60A5FA; 
+          color: #EC4899; 
           font-size: 0.9em; 
           padding: 0.1rem 0.3rem;
-          background: rgba(255,255,255,0.05);
+          background: #F1F5F9;
           border-radius: 4px;
         }
       `}</style>
+      {seoMeta && (
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": window.location.href
+            },
+            "headline": blog.title,
+            "description": blog.description,
+            "image": blog.image_url,
+            "author": {
+              "@type": "Person",
+              "name": blog.author || "WeBuildReach Team"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "WeBuildReach",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://webuildreach.com/logo.png"
+              }
+            },
+            "datePublished": blog.created_at,
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": seoMeta.rating_value || "4.8",
+              "ratingCount": seoMeta.rating_count || "125",
+              "bestRating": "5",
+              "worstRating": "1"
+            }
+          })}
+        </script>
+      )}
     </main>
   );
 }
 
-/* ── Reusable Recent Post Card ── */
+/* Reusable Recent Post Card */
 function RecentCard({ post, accentColor, compact = false }: { post: any; accentColor: string; compact?: boolean }) {
   return (
-    <Link to={`/blogs/${post.slug}`} className="group flex gap-3 items-start p-3 rounded-2xl hover:bg-white/5 transition-all">
-      <div className={`${compact ? "w-16 h-16" : "w-20 h-20"} rounded-xl overflow-hidden flex-shrink-0 border border-white/5`}>
+    <Link to={`/blogs/${post.slug}`} className="group flex gap-3 items-start p-3 rounded-2xl hover:bg-slate-50 transition-all text-left">
+      <div className={`${compact ? "w-16 h-16" : "w-20 h-20"} rounded-xl overflow-hidden flex-shrink-0 border border-slate-100`}>
         <img src={post.image_url} alt={post.title}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
       </div>
@@ -390,10 +456,10 @@ function RecentCard({ post, accentColor, compact = false }: { post: any; accentC
         <span className="text-[9px] font-black uppercase tracking-wider mb-1 block" style={{ color: accentColor }}>
           {post.category}
         </span>
-        <h4 className="text-sm font-bold text-white/80 line-clamp-2 group-hover:text-white transition-colors leading-snug mb-1">
+        <h4 className="text-sm font-bold text-slate-700 line-clamp-2 group-hover:text-primary transition-colors leading-snug mb-1">
           {post.title}
         </h4>
-        <p className="text-[10px] text-gray-600 font-medium">
+        <p className="text-[10px] text-slate-400 font-semibold">
           {new Date(post.created_at).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}
         </p>
       </div>

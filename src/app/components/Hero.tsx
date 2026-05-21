@@ -1,87 +1,148 @@
 import { motion } from "motion/react";
-import { useState } from "react";
 import { Button } from "./ui/button";
-import { ArrowRight, Play, Phone } from "lucide-react";
-import { AdmissionDialog } from "./AdmissionDialog";
+import { ArrowRight, Star, TrendingUp, Sparkles } from "lucide-react";
 
 interface HeroProps {
   onBookNow?: () => void;
 }
 
 export function Hero({ onBookNow }: HeroProps) {
+  const handleScrollToServices = () => {
+    const servicesSection = document.getElementById("services");
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <section className="relative h-[100svh] w-full overflow-hidden flex items-center justify-center pt-16">
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop" 
-          alt="Digital Marketing Background"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/60 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#050505] z-10" />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-20 w-full max-w-4xl mx-auto px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
+    <section className="relative w-full pt-36 md:pt-44 pb-20 overflow-hidden">
+      {/* Decorative Floating Blobs & SVGs specific to Hero */}
+      <div className="absolute top-[20%] left-[8%] w-12 h-12 bg-indigo-100 rounded-full blur-sm animate-bounce opacity-60 pointer-events-none" />
+      <div className="absolute bottom-[15%] left-[20%] w-16 h-16 bg-pink-100 rounded-full blur-md animate-pulse opacity-50 pointer-events-none" />
+      
+      {/* Main Container */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
+          
+          {/* Left Column: Text & CTAs */}
+          <div className="lg:col-span-7 text-left">
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm text-[#60A5FA] text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase mb-6 md:mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              Digital Marketing • Web Dev • Freelance
+              {/* Pill Badge */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.1, duration: 0.5 }}
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs md:text-sm font-semibold mb-6 shadow-sm"
+              >
+                <Sparkles className="w-4 h-4" />
+                <span>Top-rated Web & Digital Agency</span>
+              </motion.div>
+
+              {/* Heading */}
+              <h1
+                className="text-slate-900 mb-6 font-extrabold tracking-tight"
+                style={{
+                  fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
+                  lineHeight: 1.1,
+                  letterSpacing: '-0.03em'
+                }}
+              >
+                Elevate Your Brand with Expert <span className="text-primary">SEO & Marketing</span>
+              </h1>
+
+              {/* Description */}
+              <p className="text-slate-600 mb-10 max-w-xl text-base md:text-lg leading-relaxed">
+                Supercharge your online reach with our expert SEO and digital marketing solutions. 
+                We build high-performance CRMs, custom web applications, and high-ROI Meta Ads strategies to scale your business.
+              </p>
+
+              {/* Dual CTA Buttons */}
+              <div className="flex flex-wrap items-center gap-4">
+                <Button
+                  onClick={onBookNow}
+                  size="lg"
+                  className="bg-primary hover:bg-primary/95 text-white rounded-full px-8 py-7 font-bold text-base shadow-[0_6px_20px_rgba(90,69,253,0.35)] transition-all duration-300 hover:scale-[1.02] flex items-center gap-3 group"
+                >
+                  Start Business Now
+                  <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center text-primary transition-transform duration-300 group-hover:translate-x-1">
+                    <ArrowRight className="w-4 h-4" />
+                  </div>
+                </Button>
+
+              </div>
             </motion.div>
+          </div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-white mb-6"
-            style={{
-              fontSize: 'clamp(2.5rem, 8vw, 5rem)',
-              fontWeight: 800,
-              lineHeight: 1,
-              letterSpacing: '-0.04em'
-            }}
-          >
-            Shivam Builds <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3B82F6] to-[#60A5FA]">Digital Excellence</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-white/80 mb-10 max-w-2xl mx-auto font-light px-4 md:px-0"
-            style={{ fontSize: 'clamp(1rem, 3vw, 1.25rem)', lineHeight: 1.6 }}
-          >
-            Recognized as the <strong>Best Website Developer in Delhi</strong>, I am a 
-            Freelance Expert with 5+ years of experience. I build high-performance 
-            CRMs, ERPs, E-commerce platforms, and Meta Ads strategies.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 px-6 md:px-0"
-          >
-            <Button
-              size="lg"
-              onClick={onBookNow}
-              className="w-full sm:w-auto h-14 bg-[#3B82F6] hover:bg-white text-white hover:text-[#0A0A0A] border-none rounded-2xl px-8 font-bold text-lg shadow-[0_0_20px_rgba(59,130,246,0.4)] transition-all active:scale-95"
+          {/* Right Column: Hero Visual Mask & Floating Cards */}
+          <div className="lg:col-span-5 relative flex justify-center items-center mt-8 lg:mt-0">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="relative w-full max-w-[420px] aspect-square"
             >
-              Book a Consultation
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-           
-          </motion.div>
-        </motion.div>
+              {/* Backdrop grid & accent circle */}
+              <div className="absolute inset-0 border border-slate-200/50 rounded-full pointer-events-none p-4 animate-[spin_60s_linear_infinite]">
+                <div className="w-full h-full border border-dashed border-primary/20 rounded-full" />
+              </div>
+
+              {/* Large Circular Curved Image Container */}
+              <div className="absolute inset-6 rounded-[40%_60%_70%_30%_/_40%_50%_60%_50%] bg-gradient-to-tr from-primary/10 to-pink-50 overflow-hidden border-4 border-white shadow-2xl">
+                <img
+                  src="https://res.cloudinary.com/dxiasatlk/image/upload/v1779363898/d2bf2299-e42f-4113-b721-cdd985638e95_lsh6c1.png"
+                  alt="WeBuildReach Professional Expert"
+                  className="w-full h-full object-cover object-top scale-105 hover:scale-110 transition-transform duration-700"
+                />
+              </div>
+
+              {/* Floating Badge 1: Google Reviews Rating */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6, duration: 0.6 }}
+                className="absolute top-[10%] -right-4 bg-white border border-slate-100 p-3 md:p-4 rounded-2xl shadow-xl flex items-center gap-3"
+              >
+                <div className="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center text-amber-500">
+                  <Star className="w-5 h-5 fill-amber-500" />
+                </div>
+                <div>
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <p className="text-slate-800 font-extrabold text-sm mt-0.5">4.9/5 Rating</p>
+                  <p className="text-[10px] text-slate-500 font-medium">Google Reviews</p>
+                </div>
+              </motion.div>
+
+              {/* Floating Badge 2: Growth Metrics */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.8, duration: 0.6 }}
+                className="absolute bottom-[10%] -left-8 bg-white border border-slate-100 p-4 rounded-2xl shadow-xl flex items-center gap-3"
+              >
+                <div className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-500">
+                  <TrendingUp className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-[10px] text-slate-500 font-semibold tracking-wider uppercase">Traffic Growth</p>
+                  <p className="text-slate-900 font-extrabold text-lg leading-none mt-1">+150%</p>
+                </div>
+              </motion.div>
+
+              {/* Ambient Blob Glow under the image */}
+              <div className="absolute inset-0 bg-primary/5 rounded-full filter blur-xl -z-10" />
+
+            </motion.div>
+          </div>
+
+        </div>
       </div>
     </section>
   );

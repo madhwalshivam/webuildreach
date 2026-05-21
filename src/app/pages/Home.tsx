@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useDocumentMetadata } from "../hooks/useDocumentMetadata";
 import { Hero } from "../components/Hero";
 import { TrustStrip } from "../components/TrustStrip";
 import { WhySection } from "../components/WhySection";
@@ -14,9 +14,10 @@ interface HomeProps {
 }
 
 export default function Home({ onBookNow }: HomeProps) {
-  useEffect(() => {
-    document.title = "Best Website Developer in Delhi | Shivam Builds";
-  }, []);
+  useDocumentMetadata(
+    "Digital Marketing Agency | WeBuildReach",
+    "WeBuildReach is a high-end digital marketing and web development agency providing expert web development, custom CRM/ERP solutions, and performance Meta Ads strategies."
+  );
 
   return (
     <>

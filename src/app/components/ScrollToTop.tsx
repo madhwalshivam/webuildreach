@@ -7,33 +7,41 @@ export function ScrollToTop() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsVisible(window.pageYOffset > 100);
+      setIsVisible(window.scrollY > 300);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
     <AnimatePresence>
       {isVisible && (
         <motion.button
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0, opacity: 0 }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
+          initial={{ scale: 0, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0, opacity: 0, y: 20 }}
+          whileHover={{ scale: 1.12, y: -2 }}
+          whileTap={{ scale: 0.92 }}
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-[9999] w-12 h-12 md:w-14 md:h-14 bg-[#2E2370]  text-white hover:text-[#2E2370] rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 border-2 border-white/20 group active:scale-90"
-          aria-label="Scroll to top"
+          className="
+            fixed bottom-7 right-7 z-[9999]
+            w-12 h-12 md:w-13 md:h-13
+            bg-primary hover:bg-primary/90
+            text-white
+            rounded-full
+            shadow-xl shadow-primary/30
+            flex items-center justify-center
+            transition-colors duration-300
+            border-2 border-white
+            group
+          "
+          aria-label="Back to top"
         >
-          <ArrowUp className="w-6 h-6 group-hover:-translate-y-1 transition-transform" />
+          <ArrowUp className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform duration-300" />
         </motion.button>
       )}
     </AnimatePresence>

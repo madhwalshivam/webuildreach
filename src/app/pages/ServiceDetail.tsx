@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useDocumentMetadata } from "../hooks/useDocumentMetadata";
 import { useParams, Navigate } from "react-router";
 import { SubPageHero } from "../components/SubPageHero";
 import { motion } from "motion/react";
@@ -176,22 +176,20 @@ export default function ServiceDetail({ onBookNow }: ServiceDetailProps) {
   const { slug } = useParams();
   const service = slug ? servicesData[slug] : null;
 
-  useEffect(() => {
-    if (service) {
-      document.title = `${service.title} | Shivam Builds`;
-    }
-  }, [service]);
+  useDocumentMetadata(
+    service ? `${service.title} | WeBuildReach` : "",
+    service ? `${service.subtitle} Explore features, custom processes, and details for our ${service.title} services.` : ""
+  );
 
   if (!service) {
     return <Navigate to="/services" replace />;
   }
 
   return (
-    <main className="bg-[#050505] min-h-screen">
+    <main className="bg-background text-foreground min-h-screen">
       <SubPageHero 
         title={service.title} 
         subtitle={service.subtitle}
-        backgroundImage={service.image}
       />
 
       {/* Features Grid */}
@@ -204,16 +202,16 @@ export default function ServiceDetail({ onBookNow }: ServiceDetailProps) {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-[#3B82F6] tracking-[0.2em] uppercase mb-4 font-bold">Key Features</h2>
-              <h3 className="text-white text-3xl sm:text-4xl md:text-5xl font-extrabold mb-8 leading-tight">
+              <h2 className="text-primary tracking-[0.2em] uppercase mb-4 font-bold">Key Features</h2>
+              <h3 className="text-slate-900 text-3xl sm:text-4xl md:text-5xl font-extrabold mb-8 leading-tight">
                 Solutions built for <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3B82F6] to-[#60A5FA]">Modern Businesses</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-indigo-600">Modern Businesses</span>
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {service.features.map((feature: string, i: number) => (
-                  <div key={i} className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/10 group hover:border-[#3B82F6]/50 transition-all">
-                    <CheckCircle2 className="w-5 h-5 text-[#3B82F6]" />
-                    <span className="text-white/80 text-sm font-medium">{feature}</span>
+                  <div key={i} className="flex items-center gap-3 p-4 rounded-2xl bg-card border border-slate-100 shadow-sm group hover:border-primary transition-all">
+                    <CheckCircle2 className="w-5 h-5 text-primary" />
+                    <span className="text-slate-700 text-sm font-medium">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -226,18 +224,18 @@ export default function ServiceDetail({ onBookNow }: ServiceDetailProps) {
               transition={{ duration: 0.8 }}
               className="relative w-full"
             >
-              <div className="aspect-square rounded-[2rem] sm:rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl">
+              <div className="aspect-square rounded-[2rem] sm:rounded-[3rem] overflow-hidden border border-white shadow-xl">
                 <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#3B82F6]/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent" />
               </div>
-              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[#3B82F6] rounded-full blur-[100px] opacity-20 -z-10" />
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-primary rounded-full blur-[100px] opacity-15 -z-10" />
             </motion.div>
           </div>
 
           {/* Process Section */}
           <div className="text-center mb-16">
-            <h2 className="text-white text-4xl font-extrabold mb-4">Our Development Process</h2>
-            <p className="text-[#94A3B8] max-w-2xl mx-auto">We follow a systematic approach to ensure your project is delivered on time and exceeds your expectations.</p>
+            <h2 className="text-slate-900 text-4xl font-extrabold mb-4">Our Development Process</h2>
+            <p className="text-slate-500 max-w-2xl mx-auto">We follow a systematic approach to ensure your project is delivered on time and exceeds your expectations.</p>
           </div>
 
           <div className="grid md:grid-cols-4 gap-8">
@@ -248,14 +246,14 @@ export default function ServiceDetail({ onBookNow }: ServiceDetailProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="relative p-8 rounded-3xl bg-[#0A0A0A] border border-white/5 text-center group hover:border-[#3B82F6]/30 transition-all"
+                className="relative p-8 rounded-3xl bg-card border border-slate-100 text-center group hover:border-primary/50 transition-all shadow-sm"
               >
-                <div className="w-12 h-12 rounded-2xl bg-[#3B82F6]/10 flex items-center justify-center mx-auto mb-6 group-hover:bg-[#3B82F6] transition-colors">
-                  <span className="text-white font-bold text-xl">{i + 1}</span>
+                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
+                  <span className="font-bold text-xl">{i + 1}</span>
                 </div>
-                <h4 className="text-white font-bold text-xl mb-3">{step.title}</h4>
-                <p className="text-[#94A3B8] text-sm leading-relaxed">{step.desc}</p>
-                {i < 3 && <ArrowRight className="hidden md:block absolute top-1/2 -right-4 -translate-y-1/2 text-white/10 w-8 h-8" />}
+                <h4 className="text-slate-900 font-bold text-xl mb-3">{step.title}</h4>
+                <p className="text-slate-500 text-sm leading-relaxed">{step.desc}</p>
+                {i < 3 && <ArrowRight className="hidden md:block absolute top-1/2 -right-4 -translate-y-1/2 text-slate-200 w-8 h-8" />}
               </motion.div>
             ))}
           </div>
@@ -265,15 +263,18 @@ export default function ServiceDetail({ onBookNow }: ServiceDetailProps) {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-20 sm:mt-32 p-6 sm:p-12 rounded-3xl sm:rounded-[3rem] bg-gradient-to-r from-[#3B82F6]/20 to-[#2563EB]/20 border border-[#3B82F6]/30 text-center"
+            className="mt-20 sm:mt-32 p-6 sm:p-12 rounded-3xl sm:rounded-[3rem] bg-gradient-to-r from-primary to-indigo-600 text-center shadow-xl text-white relative overflow-hidden"
           >
-            <h2 className="text-white text-2xl sm:text-3xl md:text-5xl font-extrabold mb-6 leading-tight">
+            <div className="absolute top-[-50%] left-[-20%] w-[350px] h-[350px] bg-white/5 rounded-full blur-3xl pointer-events-none" />
+            
+            <h2 className="text-white text-2xl sm:text-3xl md:text-5xl font-extrabold mb-6 leading-tight relative z-10">
               Ready to build your <br /> next project?
             </h2>
+            
             <Button 
               size="lg" 
               onClick={onBookNow}
-              className="bg-[#3B82F6] hover:bg-white text-black font-bold w-full sm:w-auto px-6 sm:px-12 py-4 sm:py-6 rounded-xl sm:rounded-2xl text-base sm:text-lg md:text-xl shadow-2xl transition-all"
+              className="bg-white hover:bg-slate-50 text-primary hover:text-primary/95 font-bold w-full sm:w-auto px-12 py-6 rounded-full text-base sm:text-lg md:text-xl shadow-lg transition-all relative z-10"
             >
               Book a Free Consultation
             </Button>

@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /admin/
 
-Sitemap: https://www.shivambuilds.in/sitemap.xml
+Sitemap: https://webuildreach.com/sitemap.xml

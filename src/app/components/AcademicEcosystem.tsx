@@ -1,73 +1,19 @@
 import { motion } from "motion/react";
+import { Play, Check, Shield, Target } from "lucide-react";
 import { useState } from "react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "./ui/tabs";
-import { Globe, BarChart, Database, Smartphone } from "lucide-react";
-
-const services = [
-  {
-    id: "web-dev",
-    label: "Web & Software",
-    icon: Globe,
-    category: "Development",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
-    description: "Building high-performance web applications and custom software solutions tailored to your business needs.",
-    highlights: [
-      "Custom React & Next.js development",
-      "Robust Backend systems (Node.js/Go)",
-      "Software automation tools",
-      "API design and integration",
-    ],
-  },
-  {
-    id: "marketing",
-    label: "Digital Marketing",
-    icon: BarChart,
-    category: "Growth",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
-    description: "Data-driven marketing strategies focusing on Meta Ads, SEO, and brand positioning to drive conversions.",
-    highlights: [
-      "Expert Meta Ads management",
-      "Performance marketing strategy",
-      "SEO & Content optimization",
-      "Conversion Rate Optimization (CRO)",
-    ],
-  },
-  {
-    id: "solutions",
-    label: "CRM & ERP",
-    icon: Database,
-    category: "Management",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-    description: "Specialized in creating custom CRM and School ERP systems to streamline business operations.",
-    highlights: [
-      "Custom School ERP development",
-      "Business CRM automation",
-      "Database management & security",
-      "Reporting & Analytics dashboards",
-    ],
-  },
-  {
-    id: "apps",
-    label: "Mobile & E-com",
-    icon: Smartphone,
-    category: "E-commerce",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80",
-    description: "Creating seamless mobile experiences and high-converting e-commerce stores for global brands.",
-    highlights: [
-      "React Native & Flutter apps",
-      "Shopify & Custom E-commerce",
-      "Secure payment gateway integration",
-      "UI/UX for mobile platforms",
-    ],
-  },
-];
+import { AdmissionDialog } from "./AdmissionDialog";
 
 export function AcademicEcosystem() {
-  const [activeTab, setActiveTab] = useState("web-dev");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   return (
-    <section className="relative py-20 bg-[#0A0A0A]">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="relative py-24 bg-transparent overflow-hidden">
+      {/* Background ambient light */}
+      <div className="absolute bottom-[10%] left-[-5%] w-[400px] h-[400px] bg-purple-100/30 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        
+        {/* Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -75,82 +21,126 @@ export function AcademicEcosystem() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <p className="text-[#3B82F6] tracking-[0.2em] uppercase mb-4 font-bold">
-            Detailed Expertise
-          </p>
-          <h2 id="detailed-services" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1.1, color: '#FFFFFF' }}>
-            Core Technical Solutions
+          <span className="inline-block px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-wider mb-4">
+            TAILORED SOLUTIONS
+          </span>
+          <h2 id="detailed-services" className="text-slate-900 font-extrabold tracking-tight mb-4" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', lineHeight: 1.15 }}>
+            Tailored Solutions, Proven Results,<br className="hidden md:inline" /> and Exceptional Service
           </h2>
+          <p className="text-slate-500 max-w-xl mx-auto text-base">
+            We focus on delivering premium digital structures that drive engagement and maximize client ROI.
+          </p>
         </motion.div>
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="w-full grid grid-cols-2 md:grid-cols-4 gap-4 bg-transparent h-auto mb-12">
-            {services.map((service) => (
-              <TabsTrigger
-                key={service.id}
-                value={service.id}
-                className="flex flex-col items-center gap-3 p-6 rounded-2xl border-2 border-white/5 bg-white/5 data-[state=active]:border-[#3B82F6] data-[state=active]:bg-[#3B82F6]/10 transition-all duration-300 hover:border-[#3B82F6]/50 text-white/70 data-[state=active]:text-white"
-              >
-                <service.icon className="w-8 h-8 text-[#3B82F6]" />
-                <span style={{ fontWeight: 700, fontSize: '0.9375rem' }}>{service.label}</span>
-              </TabsTrigger>
-            ))}
-          </TabsList>
+        {/* Content Layout */}
+        <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+          
+          {/* Left Card: Large Video / Image Card */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-7 group relative rounded-3xl overflow-hidden shadow-xl border border-slate-100 cursor-pointer min-h-[400px] flex flex-col justify-end"
+            onClick={() => setIsDialogOpen(true)}
+          >
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0">
+              <img
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop"
+                alt="WeBuildReach Collaboration Video"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent" />
+            </div>
 
-          {services.map((service) => (
-            <TabsContent key={service.id} value={service.id} className="mt-0">
+            {/* Play Button Overlay */}
+            <div className="absolute inset-0 flex items-center justify-center z-10">
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                className="grid md:grid-cols-2 gap-12 items-center"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/30 group-hover:bg-primary-hover transition-colors duration-300"
               >
-                <div className="order-2 md:order-1">
-                  <div className="inline-block px-4 py-2 rounded-full bg-[#3B82F6]/10 text-[#3B82F6] mb-6" style={{ fontWeight: 700 }}>
-                    {service.category}
-                  </div>
-
-                  <h3 className="text-white mb-4" style={{ fontSize: '2.5rem', fontWeight: 800 }}>
-                    {service.label}
-                  </h3>
-
-                  <p className="text-[#94A3B8] mb-8 leading-relaxed" style={{ fontSize: '1.125rem' }}>
-                    {service.description}
-                  </p>
-
-                  <div className="space-y-3">
-                    {service.highlights.map((highlight, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1, duration: 0.4 }}
-                        className="flex items-center gap-3"
-                      >
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#3B82F6]" />
-                        <p className="text-[#94A3B8]">{highlight}</p>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="relative order-1 md:order-2 group">
-                  <div className="aspect-[4/3] rounded-3xl overflow-hidden border border-white/5 shadow-2xl">
-                    <img 
-                      src={service.image} 
-                      alt={service.label} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-tr from-[#3B82F6]/20 to-transparent" />
-                  </div>
-                  {/* Decorative Elements */}
-                  <div className="absolute -top-4 -right-4 w-24 h-24 bg-[#3B82F6] rounded-full blur-3xl opacity-20 -z-10" />
-                </div>
+                <Play className="w-6 h-6 fill-current ml-1" />
               </motion.div>
-            </TabsContent>
-          ))}
-        </Tabs>
+            </div>
+
+            {/* Content overlay */}
+            <div className="relative z-20 p-8 md:p-12 text-left">
+              <span className="text-xs font-bold uppercase tracking-wider text-pink-400 mb-2 block">
+                Who We Are
+              </span>
+              <h3 className="text-white font-extrabold text-2xl md:text-3xl tracking-tight leading-tight max-w-xl group-hover:text-primary transition-colors duration-300">
+                Explore Our Unique Value Proposition & How We Drive Business Growth
+              </h3>
+            </div>
+          </motion.div>
+
+          {/* Right Cards: Two Checklist Features */}
+          <div className="lg:col-span-5 flex flex-col gap-6 justify-between">
+            
+            {/* Card 1: Support */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              className="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm flex flex-col justify-between relative hover:border-primary/40 transition-colors duration-300 group"
+            >
+              <div className="absolute top-6 right-6 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                <Check className="w-4 h-4" />
+              </div>
+              
+              <div>
+                <span className="inline-block px-3 py-1 rounded-full bg-primary/5 text-primary text-[10px] font-bold tracking-widest uppercase mb-4">
+                  SUPPORT
+                </span>
+                
+                <h4 className="text-slate-900 font-extrabold text-lg md:text-xl mb-3 leading-snug">
+                  We do more than just a service provider, we're your partner in success
+                </h4>
+                
+                <p className="text-slate-500 text-sm leading-relaxed">
+                  Our dedicated engineering and marketing team is here 24/7. We provide proactive monitoring, routine updates, and immediate troubleshooting to ensure your business runs continuously without hitches.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Card 2: Our Goal */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm flex flex-col justify-between relative hover:border-pink-300 transition-colors duration-300 group"
+            >
+              <div className="absolute top-6 right-6 w-8 h-8 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-500">
+                <Check className="w-4 h-4" />
+              </div>
+              
+              <div>
+                <span className="inline-block px-3 py-1 rounded-full bg-pink-500/5 text-pink-500 text-[10px] font-bold tracking-widest uppercase mb-4">
+                  OUR GOAL
+                </span>
+                
+                <h4 className="text-slate-900 font-extrabold text-lg md:text-xl mb-3 leading-snug">
+                  We focus on results, we're dedicated to helping you achieve your goals
+                </h4>
+                
+                <p className="text-slate-500 text-sm leading-relaxed">
+                  We run experiments and data checks to optimize your conversions. From UI/UX refinement to Meta Ads target adjustments, every action is oriented to drive sales, brand reach, and high-ROI returns.
+                </p>
+              </div>
+            </motion.div>
+
+          </div>
+
+        </div>
       </div>
+
+      {/* AdmissionDialog (Book consultation) */}
+      <AdmissionDialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} />
     </section>
   );
 }

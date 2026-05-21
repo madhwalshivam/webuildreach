@@ -23,7 +23,7 @@ const timeline = [
   {
     year: "2024+",
     title: "Global Tech Partner",
-    description: "Operating as an independent freelance expert for international clients, delivering end-to-end tech and marketing growth.",
+    description: "Operating as an independent technology partner for international clients, delivering end-to-end tech and marketing growth.",
     icon: Target,
   },
 ];
@@ -33,8 +33,8 @@ export function InternationalVision() {
     <section className="relative py-32 bg-[#050505] overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#3B82F6] rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#60A5FA] rounded-full blur-[120px]" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#EF4444] rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#DC2626] rounded-full blur-[120px]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
@@ -45,8 +45,8 @@ export function InternationalVision() {
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
         >
-          <p className="text-[#3B82F6] tracking-[0.2em] uppercase mb-4 font-bold">
-            My Professional Growth
+          <p className="text-[#EF4444] tracking-[0.2em] uppercase mb-4 font-bold">
+            Our Professional Growth
           </p>
           <h2 className="text-white mb-6" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 800, lineHeight: 1.1 }}>
             Roadmap to Digital Expertise
@@ -59,7 +59,7 @@ export function InternationalVision() {
         {/* Timeline */}
         <div className="relative">
           {/* Vertical Line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#3B82F6] via-[#60A5FA] to-[#3B82F6] hidden md:block opacity-30" />
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#EF4444] via-[#DC2626] to-[#EF4444] hidden md:block opacity-30" />
 
           <div className="space-y-12">
             {timeline.map((item, index) => (
@@ -75,7 +75,7 @@ export function InternationalVision() {
               >
                 {/* Content */}
                 <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
-                  <div className="inline-block px-4 py-1 rounded-full bg-[#3B82F6]/20 text-[#3B82F6] mb-4" style={{ fontWeight: 700 }}>
+                  <div className="inline-block px-4 py-1 rounded-full bg-[#EF4444]/20 text-[#EF4444] mb-4" style={{ fontWeight: 700 }}>
                     {item.year}
                   </div>
                   <h3 className="text-white mb-3" style={{ fontSize: '1.5rem', fontWeight: 700 }}>
@@ -88,11 +88,11 @@ export function InternationalVision() {
 
                 {/* Icon Circle */}
                 <div className="relative flex-shrink-0">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#3B82F6] to-[#2563EB] flex items-center justify-center border-4 border-[#050505] shadow-2xl">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#EF4444] to-[#DC2626] flex items-center justify-center border-4 border-[#050505] shadow-2xl">
                     <item.icon className="w-9 h-9 text-white" />
                   </div>
                   {/* Glow Effect */}
-                  <div className="absolute inset-0 rounded-full bg-[#3B82F6] blur-xl opacity-30 -z-10" />
+                  <div className="absolute inset-0 rounded-full bg-[#EF4444] blur-xl opacity-30 -z-10" />
                 </div>
 
                 {/* Spacer for alternating layout */}
@@ -114,8 +114,8 @@ export function InternationalVision() {
             Ready to be part of the next success story?
           </p>
           <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
-            <Globe2 className="w-5 h-5 text-[#60A5FA]" />
-            <span className="text-white" style={{ fontWeight: 700 }}>Available for International Freelance Projects</span>
+            <Globe2 className="w-5 h-5 text-[#EF4444]" />
+            <span className="text-white" style={{ fontWeight: 700 }}>Available for International Projects</span>
           </div>
         </motion.div>
       </div>

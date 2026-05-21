@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useDocumentMetadata } from "../hooks/useDocumentMetadata";
 import { motion } from "motion/react";
 import { SubPageHero } from "../components/SubPageHero";
 
@@ -26,15 +26,16 @@ const projects = [
 ];
 
 export default function Campus() {
-  useEffect(() => {
-    document.title = "Portfolio | Best Website Developer in Delhi - Shivam Builds";
-  }, []);
+  useDocumentMetadata(
+    "Portfolio | Digital Marketing Agency - WeBuildReach",
+    "Explore a selection of high-performance digital products and successful marketing campaigns delivered to our clients by WeBuildReach."
+  );
 
   return (
     <div className="min-h-screen bg-[#050505] text-white">
       <SubPageHero 
         title="Project Portfolio" 
-        subtitle="Explore a selection of high-performance digital products and successful marketing campaigns delivered to my clients."
+        subtitle="Explore a selection of high-performance digital products and successful marketing campaigns delivered to our clients."
         backgroundImage="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop"
       />
 
@@ -42,7 +43,7 @@ export default function Campus() {
       <section className="py-24 max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">Featured Work</h2>
-          <div className="w-20 h-1 bg-[#3B82F6] mx-auto" />
+          <div className="w-20 h-1 bg-[#EF4444] mx-auto" />
         </div>
         
         <div className="grid md:grid-cols-2 gap-12">
@@ -80,9 +81,9 @@ export default function Campus() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold text-white mb-8">Built for <span className="text-[#3B82F6]">Performance</span></h2>
+            <h2 className="text-4xl font-bold text-white mb-8">Built for <span className="text-[#EF4444]">Performance</span></h2>
             <p className="text-[#94A3B8] text-lg mb-10 leading-relaxed">
-              Every project I undertake is optimized for maximum speed and conversion. As the best website developer in Delhi, I ensure that your digital presence isn't just a website, but a powerful business tool.
+              Every project we undertake is optimized for maximum speed and conversion. As a premier digital marketing agency, we ensure that your digital presence isn't just a website, but a powerful business tool.
             </p>
             <div className="grid grid-cols-2 gap-6">
               <div className="p-8 rounded-3xl bg-[#111111] border border-white/5">

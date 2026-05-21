@@ -13,6 +13,13 @@ import Blogs from "./pages/Blogs";
 import BlogDetail from "./pages/BlogDetail";
 import Contact from "./pages/Contact";
 import ServiceDetail from "./pages/ServiceDetail";
+import NotFound from "./pages/NotFound";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import RefundPolicy from "./pages/RefundPolicy";
+import FAQ from "./pages/FAQ";
+import WorkWithUs from "./pages/WorkWithUs";
+
 
 // Admin Pages
 import { ProtectedRoute } from "./components/ProtectedRoute";
@@ -76,7 +83,7 @@ function AppContent() {
       document.head.appendChild(canonicalLink);
     }
 
-    const siteUrl = "https://www.shivambuilds.in";
+    const siteUrl = "https://webuildreach.com";
     const cleanPath = location.pathname === "/" ? "" : location.pathname.replace(/\/+$/, "");
     const canonicalUrl = `${siteUrl}${cleanPath}`;
     
@@ -84,8 +91,14 @@ function AppContent() {
   }, [location.pathname, isAdminRoute]);
 
   return (
-    <div className="min-h-screen bg-[#050505] overflow-x-hidden">
-      <Toaster position="top-center" richColors theme="dark" />
+    <div className="min-h-screen bg-background text-foreground relative overflow-clip">
+      {/* Ambient background blobs matching the design mockup */}
+      <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-purple-200/30 blur-[130px] pointer-events-none z-0" />
+      <div className="absolute top-[20%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-pink-100/20 blur-[140px] pointer-events-none z-0" />
+      <div className="absolute top-[50%] left-[-5%] w-[40vw] h-[40vw] rounded-full bg-blue-100/30 blur-[130px] pointer-events-none z-0" />
+      <div className="absolute bottom-[-5%] right-[-5%] w-[50vw] h-[50vw] rounded-full bg-purple-100/20 blur-[150px] pointer-events-none z-0" />
+
+      <Toaster position="top-center" richColors theme="light" />
       
       {!isAdminRoute && <Navigation onBookNow={() => setIsPopUpOpen(true)} />}
       
@@ -110,12 +123,18 @@ function AppContent() {
           </Route>
           
           <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+          <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
+          <Route path="/terms-of-service" element={<PageTransition><TermsOfService /></PageTransition>} />
+          <Route path="/refund-policy" element={<PageTransition><RefundPolicy /></PageTransition>} />
+          <Route path="/faq" element={<PageTransition><FAQ /></PageTransition>} />
+          <Route path="/work-with-us" element={<PageTransition><WorkWithUs /></PageTransition>} />
+          <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
         </Routes>
       </AnimatePresence>
 
       {!isAdminRoute && (
         <>
-          <Footer onBookNow={() => setIsPopUpOpen(true)} />
+          <Footer />
           <ScrollToTop />
           <AdmissionDialog isOpen={isPopUpOpen} onClose={() => setIsPopUpOpen(false)} />
         </>

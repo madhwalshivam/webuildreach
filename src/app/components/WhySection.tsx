@@ -1,78 +1,127 @@
 import { motion } from "motion/react";
-import { Rocket, Heart, Globe } from "lucide-react";
-
-const pillars = [
-  {
-    icon: Rocket,
-    title: "Scalable Solutions",
-    description: "I build robust Web and Mobile applications that grow with your business, using the latest tech stacks.",
-  },
-  {
-    icon: Globe,
-    title: "Digital Marketing",
-    description: "Expert Meta Ads and Digital Marketing strategies to scale your brand and maximize ROI with 5+ years of experience.",
-  },
-  {
-    icon: Heart,
-    title: "Customer Success",
-    description: "Developing custom CRMs and School ERPs that streamline your operations and enhance user experience.",
-  },
-];
+import { ArrowRight, Sparkles, CheckCircle } from "lucide-react";
+import { Button } from "./ui/button";
 
 export function WhySection() {
+  const points = [
+    "Expert team with 5+ years of digital experience",
+    "Custom full-stack web and app solutions",
+    "Data-driven high-ROI marketing strategies",
+    "Bespoke CRM & ERP workflow automations"
+  ];
+
   return (
-    <section className="relative py-32 bg-[#050505] overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-[#3B82F6] rounded-full blur-[120px]" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-[#2563EB] rounded-full blur-[120px]" />
-      </div>
-
+    <section className="relative py-24 overflow-hidden">
+      {/* Decorative Blur Blobs */}
+      <div className="absolute top-[30%] left-[-10%] w-[350px] h-[350px] bg-purple-200/20 rounded-full blur-[100px] pointer-events-none" />
+      
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <p className="text-[#3B82F6] tracking-[0.2em] uppercase mb-4 font-bold">
-            My Expertise
-          </p>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1.1, color: 'white' }}>
-            Why Work With Shivam Builds
-          </h2>
-        </motion.div>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {pillars.map((pillar, index) => (
+        <div className="grid lg:grid-cols-12 gap-16 items-center">
+          
+          {/* Left Column: Styled Circular Image Frame with Spinning Dashed Ring */}
+          <div className="lg:col-span-6 relative flex justify-center items-center">
             <motion.div
-              key={pillar.title}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative w-full max-w-[400px] aspect-square"
+            >
+              {/* Outer Dashed Spinning Ring */}
+              <div className="absolute inset-0 border border-slate-200 rounded-full p-6 animate-[spin_40s_linear_infinite]">
+                <div className="w-full h-full border border-dashed border-primary/30 rounded-full" />
+              </div>
+
+              {/* Floating Badge: Since 2018 */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: -20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+                className="absolute -top-4 left-6 bg-white border border-slate-100 p-4 rounded-full shadow-lg flex items-center justify-center flex-col w-20 h-20 z-20"
+              >
+                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider leading-none">Since</span>
+                <span className="text-primary font-extrabold text-lg leading-none mt-1">2018</span>
+              </motion.div>
+
+              {/* Inner Circle Image */}
+              <div className="absolute inset-8 rounded-full overflow-hidden border-8 border-white shadow-2xl bg-slate-100">
+                <img
+                  src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop"
+                  alt="WeBuildReach Digital Solutions"
+                  className="w-full h-full object-cover scale-105 hover:scale-110 transition-transform duration-700"
+                />
+              </div>
+
+              {/* Floating Floater Widget: Strategy & Marketing */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6, duration: 0.6 }}
+                className="absolute bottom-12 -right-6 bg-white border border-slate-100 py-3 px-5 rounded-2xl shadow-xl flex items-center gap-2.5 z-20"
+              >
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                  <Sparkles className="w-4 h-4" />
+                </div>
+                <div>
+                  <p className="text-xs text-slate-800 font-extrabold">SEO Strategy</p>
+                  <p className="text-[10px] text-slate-400 font-medium">Growth Solutions</p>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Text Information & Capabilities */}
+          <div className="lg:col-span-6 text-left">
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.2, duration: 0.8 }}
-              className="group relative"
+              transition={{ duration: 0.8 }}
             >
-              {/* Dark Card */}
-              <div className="relative p-8 rounded-3xl bg-[#111111] border border-white/5 hover:border-[#3B82F6]/50 transition-all duration-500 hover:-translate-y-2">
-                <div className="w-16 h-16 rounded-2xl bg-[#3B82F6]/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <pillar.icon className="w-8 h-8 text-[#3B82F6]" />
-                </div>
+              {/* Badge */}
+              <span className="inline-block px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-wider mb-4">
+                COMPREHENSIVE SOLUTIONS
+              </span>
 
-                <h3 className="text-white mb-4" style={{ fontSize: '1.5rem', fontWeight: 700 }}>
-                  {pillar.title}
-                </h3>
+              {/* Heading */}
+              <h2
+                className="text-slate-900 mb-6 font-extrabold tracking-tight"
+                style={{ fontSize: 'clamp(2rem, 4vw, 3.25rem)', lineHeight: 1.15 }}
+              >
+                Comprehensive SEO & Digital Marketing Solutions.
+              </h2>
 
-                <p className="text-[#94A3B8] leading-relaxed">
-                  {pillar.description}
-                </p>
+              {/* Paragraphs */}
+              <p className="text-slate-600 mb-6 leading-relaxed">
+                Welcome to WeBuildReach, your partner in online success. Our comprehensive digital marketing and development services are designed to help businesses of all sizes achieve their goals and maximize their digital ROI.
+              </p>
 
-                {/* Accent Line */}
-                <div className="absolute bottom-0 left-0 w-0 h-1 bg-[#3B82F6] group-hover:w-full transition-all duration-500 rounded-b-3xl" />
+              {/* Bullet Points */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                {points.map((point) => (
+                  <div key={point} className="flex items-start gap-2.5">
+                    <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                    <span className="text-slate-700 text-sm font-medium">{point}</span>
+                  </div>
+                ))}
               </div>
+
+              {/* CTA Button */}
+              <Button
+                size="lg"
+                className="bg-primary hover:bg-primary/95 text-white rounded-full px-8 py-6 font-bold shadow-[0_4px_14px_rgba(90,69,253,0.3)] transition-all duration-300 flex items-center gap-2 group hover:scale-[1.02]"
+              >
+                Read More
+                <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center text-primary transition-transform duration-300 group-hover:translate-x-1">
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </div>
+              </Button>
+
             </motion.div>
-          ))}
+          </div>
+
         </div>
       </div>
     </section>

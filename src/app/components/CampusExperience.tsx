@@ -1,130 +1,134 @@
 import { motion } from "motion/react";
 import { Link } from "react-router";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { Database, ShoppingCart, Layout, Smartphone, Code2, LineChart } from "lucide-react";
+import { Code2, LineChart, Database, Smartphone, ArrowRight } from "lucide-react";
+import { Button } from "./ui/button";
 
-const services = [
+const popularServices = [
   {
-    title: "Web Development",
+    title: "Search Engine Optimization (SEO)",
+    slug: "meta-ads", // matches existing slug
+    icon: LineChart,
+    description: "Enhance your online visibility, drive organic traffic, and secure top rankings on Google with search strategies.",
+    bgClass: "bg-pink-50/50 hover:bg-pink-50",
+    borderClass: "border-pink-200/30 hover:border-pink-300",
+    iconBg: "bg-pink-500",
+    iconText: "text-pink-500",
+  },
+  {
+    title: "Custom Web Development",
     slug: "web-dev",
     icon: Code2,
-    description: "High-performance, SEO-optimized websites built with modern frameworks.",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
-    span: "md:col-span-2 md:row-span-2",
+    description: "High-performance websites and bespoke web applications built with modern frameworks to capture leads.",
+    bgClass: "bg-blue-50/50 hover:bg-blue-50",
+    borderClass: "border-blue-200/30 hover:border-blue-300",
+    iconBg: "bg-blue-500",
+    iconText: "text-blue-500",
   },
   {
-    title: "E-commerce Solutions",
-    slug: "ecommerce",
-    icon: ShoppingCart,
-    description: "Scalable online stores with seamless payment integration.",
-    image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=600&q=80",
-    span: "md:col-span-1",
-  },
-  {
-    title: "CRM Solutions",
+    title: "CRM & ERP solutions",
     slug: "crm",
     icon: Database,
-    description: "Bespoke business automation systems tailored to your workflow.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80",
-    span: "md:col-span-1",
-  },
-  {
-    title: "Meta Ads & Marketing",
-    slug: "meta-ads",
-    icon: LineChart,
-    description: "Data-driven marketing strategies to maximize your ROI.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
-    span: "md:col-span-1 md:row-span-2",
+    description: "Streamline operations and automate business workflows with tailored ERP systems and secure client databases.",
+    bgClass: "bg-amber-50/50 hover:bg-amber-50",
+    borderClass: "border-amber-200/30 hover:border-amber-300",
+    iconBg: "bg-amber-500",
+    iconText: "text-amber-500",
   },
   {
     title: "Mobile App Development",
     slug: "app-dev",
     icon: Smartphone,
-    description: "Native-feel cross-platform apps for iOS and Android.",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80",
-    span: "md:col-span-2",
-  },
-  {
-    title: "Graphic & UI/UX Design",
-    slug: "graphic-design",
-    icon: Layout,
-    description: "Stunning visuals and intuitive user interfaces for your brand.",
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80",
-    span: "md:col-span-1",
-  },
-  {
-    title: "Software Automation",
-    slug: "soft-dev",
-    icon: Database,
-    description: "Automate repetitive tasks with custom bot and software solutions.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80",
-    span: "md:col-span-1",
+    description: "Intuitive, high-performance native-feel cross-platform apps for iOS and Android tailored to your business needs.",
+    bgClass: "bg-emerald-50/50 hover:bg-emerald-50",
+    borderClass: "border-emerald-200/30 hover:border-emerald-300",
+    iconBg: "bg-emerald-500",
+    iconText: "text-emerald-500",
   },
 ];
 
 export function CampusExperience() {
   return (
-    <section className="relative py-16 bg-[#0A0A0A]">
+    <section className="relative py-24 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
+        
+        {/* Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
-          <p className="text-[#3B82F6] tracking-[0.2em] uppercase mb-4 font-bold">
-            What I Offer
-          </p>
-          <h2 id="services" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1.1, color: '#FFFFFF' }}>
-            Our Professional Services
+          <span className="inline-block px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-wider mb-4">
+            Popular Services
+          </span>
+          <h2 id="services" className="text-slate-900 font-extrabold tracking-tight mb-4" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', lineHeight: 1.15 }}>
+            Popular Digital Marketing Services <br className="hidden md:inline" /> to Build Your Business
           </h2>
+          <p className="text-slate-500 max-w-xl mx-auto text-base">
+            Our experts deliver tailor-made services designed to elevate your brand's digital presence and accelerate sales.
+          </p>
         </motion.div>
 
-        {/* Bento Grid */}
-        <div className="grid md:grid-cols-4 gap-6 auto-rows-[220px] grid-flow-dense">
-          {services.map((service, index) => (
-            <Link 
-              key={service.title} 
-              to={`/services/${service.slug}`}
-              className={`${service.span} block`}
+        {/* 4-Column Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {popularServices.map((service, index) => (
+            <motion.div
+              key={service.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.6 }}
             >
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-                className="relative h-full group overflow-hidden rounded-[2rem] cursor-pointer border border-white/5"
+              <Link 
+                to={`/services/${service.slug}`}
+                className={`flex flex-col h-full p-8 rounded-3xl border ${service.borderClass} ${service.bgClass} shadow-[0_4px_20px_rgba(0,0,0,0.01)] transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,0,0,0.03)]`}
               >
-                {/* Image */}
-                <ImageWithFallback
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-50"
-                />
-
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-500" />
-
-                {/* Content */}
-                <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                  <div className="w-14 h-14 rounded-2xl bg-[#3B82F6]/10 backdrop-blur-md flex items-center justify-center mb-4 border border-[#3B82F6]/20 group-hover:bg-[#3B82F6] group-hover:scale-110 transition-all duration-300">
-                    <service.icon className="w-7 h-7 text-[#3B82F6] group-hover:text-white transition-colors duration-300" />
-                  </div>
-                  <h3 className="text-white mb-2" style={{ fontSize: '1.5rem', fontWeight: 700 }}>
-                    {service.title}
-                  </h3>
-                  <p className="text-[#94A3B8] text-sm leading-relaxed opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                    {service.description}
-                  </p>
+                {/* Icon Box */}
+                <div className={`w-14 h-14 rounded-2xl ${service.iconBg}/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300`}>
+                  <service.icon className={`w-7 h-7 ${service.iconText}`} />
                 </div>
 
-                {/* Animated Border */}
-                <div className="absolute inset-0 border-2 border-[#3B82F6]/0 group-hover:border-[#3B82F6]/30 transition-all duration-500 rounded-[2rem] pointer-events-none" />
-              </motion.div>
-            </Link>
+                {/* Content */}
+                <h3 className="text-slate-900 font-extrabold text-xl mb-4 leading-tight">
+                  {service.title}
+                </h3>
+                
+                <p className="text-slate-500 text-sm leading-relaxed mb-6 flex-grow">
+                  {service.description}
+                </p>
+
+                {/* Read More Link */}
+                <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 group-hover:text-primary transition-colors duration-300 mt-auto">
+                  <span>Learn More</span>
+                  <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </div>
+
+        {/* View More Services Button */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="text-center"
+        >
+          <Link to="/services">
+            <Button
+              size="lg"
+              className="bg-primary hover:bg-primary/95 text-white rounded-full px-8 py-6 font-bold shadow-[0_4px_14px_rgba(90,69,253,0.3)] transition-all duration-300 flex items-center gap-2 mx-auto hover:scale-[1.02]"
+            >
+              View More Services
+              <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center text-primary">
+                <ArrowRight className="w-3.5 h-3.5" />
+              </div>
+            </Button>
+          </Link>
+        </motion.div>
+
       </div>
     </section>
   );

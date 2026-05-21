@@ -42,7 +42,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-const DOMAIN = "https://www.shivambuilds.in";
+const DOMAIN = "https://webuildreach.com";
 
 const staticPages = [
   { path: "/", priority: "1.0", changefreq: "daily" },
@@ -69,7 +69,8 @@ async function fetchBlogs() {
     const { data, error } = await supabase
       .from("blogs")
       .select("slug, created_at")
-      .eq("is_published", true);
+      .eq("is_published", true)
+      .neq("slug", "site-settings-topbar");
 
     if (error) {
       console.error("Error fetching blogs from Supabase:", error.message);

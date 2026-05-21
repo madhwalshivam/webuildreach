@@ -1,68 +1,81 @@
 import { motion } from "motion/react";
 import { Quote, Rocket, BarChart, History } from "lucide-react";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 export function FounderVision() {
   return (
-    <section className="relative py-20 bg-[#0A0A0A]">
+    <section className="relative py-20 bg-transparent overflow-hidden">
+      {/* Background ambient blobs */}
+      <div className="absolute top-[20%] right-[-5%] w-[300px] h-[300px] bg-pink-100/30 rounded-full blur-[90px] pointer-events-none" />
+      
       <div className="max-w-7xl mx-auto px-6">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Content */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <p className="text-[#3B82F6] tracking-[0.2em] uppercase mb-4 font-bold">
-              The Mind Behind Shivam Builds
-            </p>
+            {/* Badge */}
+            <span className="inline-block px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-wider mb-4">
+              OUR AGENCY VISION
+            </span>
 
-            <h2 className="text-white mb-12" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1.1 }}>
-              My Vision & Passion
+            {/* Heading */}
+            <h2 className="text-slate-900 mb-12 font-extrabold tracking-tight" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', lineHeight: 1.15 }}>
+              Our Vision & Passion
             </h2>
 
-            <div className="relative mb-16 inline-block text-left">
-              <Quote className="absolute -top-10 -left-10 w-20 h-20 text-[#3B82F6] opacity-10" />
-              <blockquote className="relative p-8 md:p-12 bg-white/5 border border-white/10 rounded-4xl backdrop-blur-sm">
-                <p className="text-white mb-8 leading-relaxed" style={{ fontSize: 'clamp(1.125rem, 2vw, 1.75rem)', fontWeight: 500, fontStyle: 'italic' }}>
-                  "I don't just build websites; I build digital growth engines. My goal is to empower 
-                  businesses with technology that is both beautiful and highly functional."
+            {/* Blockquote Card */}
+            <div className="relative mb-16 inline-block text-left w-full">
+              <Quote className="absolute -top-8 -left-8 w-16 h-16 text-primary opacity-10" />
+              <blockquote className="relative p-8 md:p-12 bg-white border border-slate-100 rounded-3xl shadow-[0_10px_30px_rgba(90,69,253,0.03)] backdrop-blur-sm">
+                <p className="text-slate-800 mb-8 leading-relaxed italic" style={{ fontSize: 'clamp(1.125rem, 2vw, 1.6rem)', fontWeight: 500 }}>
+                  "We don't just build websites; we build digital growth engines. Our goal is to empower 
+                  businesses with technology and creative performance marketing that is both beautiful and highly functional."
                 </p>
-                <footer className="text-[#94A3B8]">
-                  <p className="text-white text-xl" style={{ fontWeight: 700 }}>Shivam</p>
-                  <p>Expert Website Developer & Digital Marketer</p>
+                <footer className="text-slate-500">
+                  <p className="text-slate-900 font-extrabold text-lg">WeBuildReach Team</p>
+                  <p className="text-xs mt-1">Expert Web Development & Digital Marketing Agency</p>
                 </footer>
               </blockquote>
-              {/* Decorative Glow */}
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#3B82F6] rounded-full blur-[100px] opacity-20 -z-10" />
             </div>
 
+            {/* Feature Column Cards */}
             <div className="grid md:grid-cols-3 gap-8 text-left">
-              <div className="p-6 rounded-3xl bg-white/5 border border-white/10 hover:border-[#3B82F6]/50 transition-colors duration-300">
-                <div className="w-10 h-10 bg-[#3B82F6] rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-[#3B82F6]/20">
-                  <History className="w-6 h-6 text-white" />
+              
+              {/* Card 1 */}
+              <div className="p-6 rounded-2xl bg-white border border-slate-100 hover:border-primary/40 transition-colors duration-300 shadow-sm">
+                <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-primary">
+                  <History className="w-5 h-5" />
                 </div>
-                <p className="text-[#94A3B8] leading-relaxed">
-                  Years of experience in full-stack development and performance marketing
+                <h4 className="text-slate-900 font-bold mb-2">Proven Track Record</h4>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  Years of experience in full-stack development and performance marketing.
                 </p>
               </div>
-              <div className="p-6 rounded-3xl bg-white/5 border border-white/10 hover:border-[#3B82F6]/50 transition-colors duration-300">
-                <div className="w-10 h-10 bg-[#3B82F6] rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-[#3B82F6]/20">
-                  <Rocket className="w-6 h-6 text-white" />
+
+              {/* Card 2 */}
+              <div className="p-6 rounded-2xl bg-white border border-slate-100 hover:border-primary/40 transition-colors duration-300 shadow-sm">
+                <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-primary">
+                  <Rocket className="w-5 h-5" />
                 </div>
-                <p className="text-[#94A3B8] leading-relaxed">
-                  Specialized in custom CRM, ERP, and high-conversion E-commerce solutions
+                <h4 className="text-slate-900 font-bold mb-2">Custom Tech Ecosystem</h4>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  Specialized in custom CRM, ERP, and high-conversion E-commerce solutions.
                 </p>
               </div>
-              <div className="p-6 rounded-3xl bg-white/5 border border-white/10 hover:border-[#3B82F6]/50 transition-colors duration-300">
-                <div className="w-10 h-10 bg-[#3B82F6] rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-[#3B82F6]/20">
-                  <BarChart className="w-6 h-6 text-white" />
+
+              {/* Card 3 */}
+              <div className="p-6 rounded-2xl bg-white border border-slate-100 hover:border-primary/40 transition-colors duration-300 shadow-sm">
+                <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-primary">
+                  <BarChart className="w-5 h-5" />
                 </div>
-                <p className="text-[#94A3B8] leading-relaxed">
-                  Expert in Meta Ads strategy and data-driven conversion rate optimization
+                <h4 className="text-slate-900 font-bold mb-2">ROI-Driven Marketing</h4>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  Expert in Meta Ads strategy and data-driven conversion rate optimization.
                 </p>
               </div>
+
             </div>
           </motion.div>
         </div>

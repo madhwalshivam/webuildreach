@@ -1,0 +1,27 @@
+/* ─── SINGLE SCROLLBAR: Only html scrolls ─── */
+html {
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(90, 69, 253, 0.3) transparent;
+}
+
+/* Webkit scrollbar theming */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(90, 69, 253, 0.3);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(90, 69, 253, 0.55);
+}
+
+/* ─── Selection highlight ─── */
+::selection {
+  background: rgba(90, 69, 253, 0.18);
+  color: inherit;
+}
