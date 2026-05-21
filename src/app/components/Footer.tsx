@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { MapPin, Phone, Mail, Facebook, Instagram, Youtube, Linkedin, ArrowRight } from "lucide-react";
+import { MapPin, Mail, Facebook, Instagram, Youtube, Linkedin, ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
 
 const footerLinks = {
@@ -109,13 +109,7 @@ export function Footer() {
                 </span>
               </li>
 
-              {/* Phone */}
-              <li className="flex gap-3 items-start">
-                <Phone className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                <a href="tel:+919991540996" className="text-slate-500 hover:text-primary transition-colors duration-300 text-sm font-medium leading-tight">
-                  +91 99915 40996
-                </a>
-              </li>
+
 
             </ul>
           </div>

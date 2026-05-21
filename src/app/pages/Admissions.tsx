@@ -6,7 +6,6 @@ import {
   UserCheck,
   MessageSquare,
   Calendar,
-  Phone as PhoneIcon,
   Mail as MailIcon
 } from "lucide-react";
 import { Button } from "../components/ui/button";
@@ -109,15 +108,7 @@ export default function Admissions() {
               </p>
 
               <div className="space-y-6">
-                <div className="flex gap-4 items-start">
-                  <div className="w-12 h-12 rounded-xl bg-[#111111] border border-white/5 shadow-md flex items-center justify-center shrink-0">
-                    <PhoneIcon className="w-6 h-6 text-[#EF4444]" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-white">Direct Hotline</h4>
-                    <p className="text-[#94A3B8]">+91 99915 40996</p>
-                  </div>
-                </div>
+
                 <div className="flex gap-4 items-start">
                   <div className="w-12 h-12 rounded-xl bg-[#111111] border border-white/5 shadow-md flex items-center justify-center shrink-0">
                     <MailIcon className="w-6 h-6 text-[#EF4444]" />

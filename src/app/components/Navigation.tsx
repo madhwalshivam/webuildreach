@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router";
 import { Button } from "./ui/button";
-import { Menu, X, Phone, Mail, ChevronDown } from "lucide-react";
+import { Menu, X, Mail, ChevronDown } from "lucide-react";
 import { AdmissionDialog } from "./AdmissionDialog";
 import { AnimatePresence } from "motion/react";
 import { supabase } from "../../lib/supabase";
@@ -392,14 +392,10 @@ export function Navigation({ onBookNow }: NavigationProps) {
               </Button>
             </motion.div>
 
-            <div className="pt-12 grid grid-cols-2 gap-4">
-              <a href="tel:+919991540996" className="flex flex-col items-center p-4 rounded-2xl bg-slate-50 border border-slate-100 text-slate-800 gap-2">
-                <Phone className="w-6 h-6 text-primary" />
-                <span className="text-xs">Call Us</span>
-              </a>
-              <a href="mailto:webuildreach@gmail.com" className="flex flex-col items-center p-4 rounded-2xl bg-slate-50 border border-slate-100 text-slate-800 gap-2">
+            <div className="pt-12">
+              <a href="mailto:webuildreach@gmail.com" className="flex flex-col items-center p-4 rounded-2xl bg-slate-50 border border-slate-100 text-slate-800 gap-2 w-full">
                 <Mail className="w-6 h-6 text-primary" />
-                <span className="text-xs">Email</span>
+                <span className="text-xs font-semibold">Email Us</span>
               </a>
             </div>
           </div>

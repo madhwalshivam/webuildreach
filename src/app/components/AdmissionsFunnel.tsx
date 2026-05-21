@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-import { MapPin, Phone, Mail, ArrowRight, Sparkles } from "lucide-react";
+import { MapPin, Mail, ArrowRight, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 
 export function AdmissionsFunnel() {
@@ -66,7 +66,7 @@ export function AdmissionsFunnel() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-5 bg-primary p-8 md:p-10 rounded-3xl text-white shadow-xl relative overflow-hidden flex flex-col justify-between"
+            className="lg:col-span-5 bg-primary p-8 md:p-10 rounded-3xl text-white shadow-xl relative overflow-hidden flex flex-col gap-10 md:gap-12"
           >
             {/* Ambient curves inside indigo card */}
             <div className="absolute top-[-30%] right-[-30%] w-60 h-60 rounded-full bg-white/5 blur-2xl pointer-events-none" />
@@ -100,16 +100,7 @@ export function AdmissionsFunnel() {
                 </div>
               </div>
 
-              {/* Item 2 */}
-              <div className="flex gap-4 items-start">
-                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0 border border-white/5">
-                  <Phone className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-sm text-white/90">Phone Number</h4>
-                  <p className="text-white/75 text-sm mt-1 leading-snug">+91 99915 40996</p>
-                </div>
-              </div>
+
 
               {/* Item 3 */}
               <div className="flex gap-4 items-start">
