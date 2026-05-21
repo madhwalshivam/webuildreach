@@ -195,7 +195,10 @@ export function Navigation({ onBookNow }: NavigationProps) {
         <div className={`max-w-7xl mx-auto px-6 transition-all duration-300 ${navPadding}`}>
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2 group shrink-0">
+            <Link to="/" className="flex items-center gap-3 group shrink-0">
+              <div className="w-10 h-10 rounded-full overflow-hidden border border-slate-200/60 bg-white flex items-center justify-center shadow-sm shrink-0">
+                <img src="/assets/favicon.png" alt="WeBuildReach Logo" className="w-full h-full object-cover" />
+              </div>
               <div className="min-w-0">
                 <span
                   className={`${textColor} truncate font-extrabold block`}
@@ -297,7 +300,10 @@ export function Navigation({ onBookNow }: NavigationProps) {
       >
         <div className="flex flex-col h-full">
           <div className="flex items-center justify-between p-6 border-b border-slate-100">
-            <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2">
+            <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-full overflow-hidden border border-slate-200/60 bg-white flex items-center justify-center shadow-sm shrink-0">
+                <img src="/assets/favicon.png" alt="WeBuildReach Logo" className="w-full h-full object-cover" />
+              </div>
               <span className="text-slate-800 font-extrabold text-xl">WeBuildReach<span className="text-primary">.com</span></span>
             </Link>
             <button

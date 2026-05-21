@@ -39,9 +39,14 @@ export function Footer() {
           {/* Brand & Description column */}
           <div className="md:col-span-5 flex flex-col justify-between">
             <div>
-              <h3 className="font-extrabold text-slate-900" style={{ fontSize: '1.75rem', lineHeight: 1.1 }}>
-                WeBuildReach<span className="text-primary">.com</span>
-              </h3>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full overflow-hidden border border-slate-200/60 bg-white flex items-center justify-center shadow-sm shrink-0">
+                  <img src="/assets/favicon.png" alt="WeBuildReach Logo" className="w-full h-full object-cover" />
+                </div>
+                <h3 className="font-extrabold text-slate-900" style={{ fontSize: '1.75rem', lineHeight: 1.1 }}>
+                  WeBuildReach<span className="text-primary">.com</span>
+                </h3>
+              </div>
               <p className="text-slate-500 text-sm mt-4 leading-relaxed max-w-sm">
                 By optimizing digital strategy, developing top-tier automation structures, and scaling advertising operations, we help brands reach peak online performance.
               </p>
