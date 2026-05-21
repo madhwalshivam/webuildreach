@@ -133,7 +133,7 @@ export default function BlogDetail() {
         <article className="min-w-0">
           {/* Back link */}
           <Link to="/blogs" className="inline-flex items-center gap-2 text-slate-500 hover:text-primary text-xs font-semibold uppercase tracking-widest transition-colors group mb-6">
-            <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> Back to journal
+            <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> Back
           </Link>
 
           {/* Card with image at top */}
